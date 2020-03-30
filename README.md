@@ -6,3 +6,4 @@ tworzenie repo
 # lab1
 
 pierwsze pliki
+poprawa plików
