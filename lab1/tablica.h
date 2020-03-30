@@ -26,10 +26,10 @@ class Table
 	{
 		for(int j = 0; j<table[i].size(); j++)
 		{
-			std::cout << table[i][j];
-			std::cout << " ";
+			cout << table[i][j];
+			cout << " ";
 		}
-		std::cout << std::endl;
+		cout << endl;
 	}
 
 }
@@ -40,7 +40,7 @@ class Table
 	{
 		if(bPos>table.size() || aPos > table[0].size())
 		{
-			cout << "Niepoprawna wartosc" << sendl;
+			cout << "Niepoprawna wartosc" << endl;
 		} else{
 			table.at(bPos).at(aPos) = new_data;
 		}

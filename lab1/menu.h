@@ -1,11 +1,11 @@
-#ifndef Menu_h
-#define Menu_h
+#ifndef menu_h
+#define menu_h
 
 #include <iostream>
 #include "tablica.h"
 
 using namespace std;
-  std::vector<std::vector<int>> table{{1,2,3},
+  vector<vector<int>> table{{1,2,3},
 	                                {1,2,3},
 					{1,2,3}};
 
@@ -20,18 +20,18 @@ using namespace std;
   
   void Menu::dataChangeMenu()
 {
-	  int xPos;
-	  int yPos;
+	  int aPos;
+	  int bPos;
 	  int new_data;
 
 	    cout << "Numer wiersza:" << endl;
-	    cin >> yPos;
+	    cin >> bPos;
 	    cout << "Numer columny:" << endl;
-	    cin >> xPos;
+	    cin >> aPos;
 	    cout << "new data" << endl;
 	    cin >> new_data;
 
-	      Table::changeData(table, xPos, yPos, new_data);
+	      Table::changeData(table, aPos, bPos, new_data);
 }
 
    void Menu::sizeChangeMenu()
@@ -51,18 +51,18 @@ using namespace std;
 {
 	 cout << "Menu:" << endl;
 	 cout << "1.Rozmiar" << endl;
-	 cout << "2.Data" << endl;
-	 cout << "3.Display" << endl;
+	 cout << "2.Dane" << endl;
+	 cout << "3.Wyswietlenie" << endl;
 }
 
 bool Menu::Choice()
 {
-	char val;
+	char value;
 
 	  Menu::mainMenu();
 
-	  cin >> val;
-	  switch(val)
+	  cin >> value;
+	  switch(value)
 	  {
 		  case '1':
 			  Menu::sizeChangeMenu();
