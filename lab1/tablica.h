@@ -16,7 +16,7 @@ class Table
 {
 	public:
 	static void changeSize(vector<vector<int>> table, int new_width, int new_height);
-	static void changeData(vector<vector<int>> table, int xPos, int yPos, int new_data);
+	static void changeData(vector<vector<int>> table, int aPos, int bPos, int new_data);
 	static void display(vector<vector<int>> table);
 };
 
