@@ -38,7 +38,7 @@ class Table
 {
 	if (table.size() > 0)
 	{
-		if(bPos>table.size() || aPos > table[0].size())
+		if(bPos>table.size() || aPos > table.size())
 		{
 			cout << "Niepoprawna wartosc" << endl;
 		} else{

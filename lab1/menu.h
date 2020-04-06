@@ -28,7 +28,7 @@ using namespace std;
 	    cin >> bPos;
 	    cout << "Numer columny:" << endl;
 	    cin >> aPos;
-	    cout << "new data" << endl;
+	    cout << "Nowa dana:" << endl;
 	    cin >> new_data;
 
 	      Table::changeData(table, aPos, bPos, new_data);
@@ -39,9 +39,9 @@ using namespace std;
 	int new_width;
 	int new_height;
 
-	  cout << "Podaj dlugosc tablicy:" << endl;
+	  cout << "Podaj nr wiersza tablicy:" << endl;
 	  cin >> new_width;
-	  cout << "Podaj szerokosc tablicy:" << endl;
+	  cout << "Podaj nr kolumny tablicy:" << endl;
 	  cin >> new_height;
 
 	  Table::changeSize(table, new_width, new_height);
