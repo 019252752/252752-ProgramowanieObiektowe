@@ -24,9 +24,9 @@ using namespace std;
 	  int bPos;
 	  int new_data;
 
-	    cout << "Numer wiersza:" << endl;
+	    cout << "Podaj nr wiersza:" << endl;
 	    cin >> bPos;
-	    cout << "Numer columny:" << endl;
+	    cout << "Podaj nr columny:" << endl;
 	    cin >> aPos;
 	    cout << "Nowa dana:" << endl;
 	    cin >> new_data;
@@ -39,9 +39,9 @@ using namespace std;
 	int new_width;
 	int new_height;
 
-	  cout << "Podaj nr wiersza tablicy:" << endl;
+	  cout << "Ilosc wierszy tablicy:" << endl;
 	  cin >> new_width;
-	  cout << "Podaj nr kolumny tablicy:" << endl;
+	  cout << "Ilosc kolumn tablicy:" << endl;
 	  cin >> new_height;
 
 	  Table::changeSize(table, new_width, new_height);
@@ -80,6 +80,6 @@ bool Menu::Choice()
 			  return 1;
 break;
 	  }
-	  return 1;
+	  return true;
 }
 #endif
