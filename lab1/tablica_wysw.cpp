@@ -6,7 +6,7 @@
 using namespace std;
 
  int main(){
-	 vector<vector<int>> table{{1,2,3},
+	  vector<vector<int>> table{{1,2,3},
 		                            {1,2,3},
 					    {1,2,3}};
 	 Table::changeData(table,0,0,100);

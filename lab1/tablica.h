@@ -10,7 +10,7 @@ using namespace std;
 {
 	int a;
 	int b;
-}Tab;
+} Tab;
 
 class Table
 {
