@@ -5,7 +5,7 @@
 #include "tablica.h"
 
 using namespace std;
-  vector<vector<int>> table{{1,2,3},
+  vector<vector<int>>  table{{1,2,3},
 	                                {1,2,3},
 					{1,2,3}};
 

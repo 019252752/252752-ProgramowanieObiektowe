@@ -4,6 +4,6 @@
 using namespace std;
 
 int main(){
-  while(Menu::Choice());
+  while (Menu::Choice());
 return 0;
 }

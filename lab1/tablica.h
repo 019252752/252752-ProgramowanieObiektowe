@@ -25,7 +25,7 @@ class Table
 	for(int i = 0; i<table.size(); i++)
 	{
 		for(int j = 0; j<table[i].size(); j++)
-		{
+		 {
 			cout << table[i][j];
 			cout << " ";
 		}
