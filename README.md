@@ -7,3 +7,12 @@ tworzenie repo
 
 pierwsze pliki
 poprawa plików
+gotowe
+
+# lab2
+
+prawie gotowe
+
+# lab3
+
+na razie folder
