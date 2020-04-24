@@ -1,30 +1,14 @@
 #include <iostream>
-#include <ncurses.h>
 
 using namespace std;
+
 namespace {
 
-	void menu_pocz() {
-		cout << "Stworz swoja poczatkowa tabele, podajac najpierw ilosc wierszy, a potem ilosc kolumn:" << endl;
-
+	void menu_start(){
+		cout<<"Podaj wspolrzedne poczatkowej tabeli." << endl;
 	}
-
-
-
-
-
-	void menu() {
-
-		
-
-		cout << endl <<"MENU" << endl;
-		cout << "WYBIERZ NUMER OPERACJI KTORA CHCESZ WYKONAC, WCISNIJ ENTER BY POTWIERDZIC: " << endl;
-		cout << "1. Stworz nowa tabele (poprzednia zostanie usunieta)" << endl <<
-			"2. Zmien rozmiar istniejacej tabeli" << endl <<
-			"3. Aktualizuj istniejace elementy w tabeli" << endl <<
-			"4. Wyswietl zawartosc tabeli" << endl
-			<< "5.Zakoncz program" << endl<< endl;
-
-		
+	void menu(){
+		cout<<"Wybierz: "<< endl;
+		cout<<"1. by stworzyc nowa tabele (stara zostanie usunieta),"<<endl<<"2. by zmienic rozmiar istniejacej tabeli,"<<endl<<"3. by zaktualizowac dane w tabeli,"<<endl<<"4. by 2yswietl zawartosc tabeli,"<<endl<<"5. by zakonczyc prace programu."<<endl<<endl;	
 	}
 }

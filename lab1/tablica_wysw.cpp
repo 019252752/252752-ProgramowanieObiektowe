@@ -1,66 +1,47 @@
 #include <iostream>
-#include <ncurses.h>
+
 using namespace std;
+
 namespace {
-	float** tabl;
+	float** tab1;
 
-	void wyswietlanie(int* r1, int* r2) {
+	void show_table(int* r1, int* r2){
 
-		int rr1 = *r1;
-		int rr2 = *r2;
-
+		int rr1= *r1;
+		int rr2= *r2;
 		
 			int wyb;
-			cout << "Chcesz wyswietlic wszystkie elementy, czy wybrany pojedynczy?" << endl <<
-				"1. Wszystkie" << endl << "2. Wybrany" << endl;
+			cout<<"Wybierz 1, by wyswietlic wszystkie elementy tbalicy lub 2 by wybrany element.\n";
+			cin>>wyb;
 
-			cin >>wyb;
-
-
-			switch (wyb)
-			{
+			switch(wyb){
 			case 1:
-				for (int i = 0; i < rr1; i++) {
-					for (int j = 0; j < rr2; j++) {
-
-						cout << "Nr: " << i << "x" << j << " zawiera: " << tabl[i][j] << endl;
-
-
+				for(int i=0; i<rr1; i++){
+					for(int j=0; j<rr2; j++){
+						cout<<tab1[i][j]<<" ";
 					}
+					cout<<endl;
 				}
-
 				break;
 			case 2:
 				int x, y;
-				cout << "Wprowadz wspolrzedne:" << endl << "Wiersz: ";
-				cin >> x;
-				while (x<1 || x>rr1)
-				{
-					cout << endl << "Nie ma takiej wspolrzednej, wprowadz poprawna: ";
-					cin >> x;
+				cout<<"Podaj wspolrzedne:"<<endl<<"Wiersz: ";
+				cin>>x;
+				while(x<1 || x>rr1){
+					cout<<endl<<"Nie ma takiego wiersza, wprowadz inna wspolrzedna: ";
+					cin>>x;
 				}
 
-				cout << endl << "Kolumna: ";
-				cin >> y;
-				while (y<1 || y>rr1)
-				{
-					cout << endl << "Nie ma takiej wspolrzednej, wprowadz poprawna: ";
-					cin >> y;
+				cout<<endl<<"Kolumna: ";
+				cin>>y;
+				while (y<1 || y>rr1){
+					cout<<endl<<"Nie ma takiej kolumny, wprowadz inna wspolrzedna: ";
+					cin>>y;
 				}
-
-				cout << tabl[x][y];
-
+				cout<<tab1[x][y];
 				break;
 			default:
-
 				break;
 			}
-
-
-
-		
-
-
-
 	}
 }
