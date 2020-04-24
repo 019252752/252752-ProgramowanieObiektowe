@@ -2,6 +2,7 @@
 #include "tablica.cpp"
 #include "tablica_wysw.cpp"
 #include "menu.cpp"
+#include "save.cpp"
 
 using namespace std;
 
@@ -10,11 +11,9 @@ int main(){
 	int choice;
 	int size1, size2, newsize1, newsize2;
 
-	menu_start();
-	cout<<"Podaj ilosc wierszy: ";
-	cin>>size1;
-	cout<<"Podaj ilosc kolumn: ";
-	cin>>size2;
+	size_open();
+	size1= *x_ind;
+	size2= *y_ind;
 
 	float** table;
 
@@ -22,6 +21,7 @@ int main(){
 
 	table=tab;
 	tab1=table;
+	table_save=table;
 
 	for(int i=0; i<size1; i++){
 		for(int j=0; j<size2; j++){
@@ -31,6 +31,10 @@ int main(){
 
 	tab=table;
 	tab1=table;
+	table_save=table;
+
+	file_open(size1, size2);
+	table=table_save;
 
 
 	while(a!=1){
@@ -78,6 +82,10 @@ int main(){
 			break;
 		}
 	}
+
+	table_save=table;
+	size_close(size1, size2);
+
 	for(int i=0; i<size2; i++) delete[] table[i];
 
 	delete[] table;

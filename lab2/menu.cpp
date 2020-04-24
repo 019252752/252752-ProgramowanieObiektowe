@@ -9,6 +9,6 @@ namespace {
 	}
 	void menu(){
 		cout<<"Wybierz: "<< endl;
-		cout<<"1. by stworzyc nowa tabele (stara zostanie usunieta),"<<endl<<"2. by zmienic rozmiar istniejacej tabeli,"<<endl<<"3. by zaktualizowac dane w tabeli,"<<endl<<"4. by 2yswietl zawartosc tabeli,"<<endl<<"5. by zakonczyc prace programu."<<endl<<endl;	
+		cout<<"1. by stworzyc nowa tabele (stara zostanie usunieta),"<<endl<<"2. by zmienic rozmiar istniejacej tabeli,"<<endl<<"3. by zaktualizowac dane w tabeli,"<<endl<<"4. by wyswietlic zawartosc tabeli,"<<endl<<"5. by zakonczyc prace programu."<<endl<<endl;	
 	}
 }

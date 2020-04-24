@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <ncurses.h> // colours
+
 using namespace std;
 
 namespace{
@@ -10,10 +10,7 @@ namespace{
 	int* x_ind;
 	int* y_ind;
 	
-	
 	void size_open(){
-	
-	
 	
 	fstream size_file;
 	size_file.open("size.txt", ios::in);
@@ -23,22 +20,17 @@ namespace{
 		size_file >> x;
 		size_file >> y;
 	
-			x_ind=&x;
-			y_ind=&y;
-
-	
+		x_ind=&x;
+		y_ind=&y;
 		}
 		else {
-			cout << "ERROR SIZE_OPEN";
+			cout << "Blad otwierania pliku size.txt";
 		}
 		
 		size_file.close();
-		
 	}
 	
-	
 	void file_open(int size_line, int size_column){
-	
 	
 	fstream file;
 	file.open("savefile.txt", ios::in);
@@ -48,14 +40,12 @@ namespace{
 		for(int i=0; i<size_line; i++){
 			for(int j=0; j<size_column; j++){
 	
-				file >> table_save[i][j];
-	
-	
-	
-		} }
+				file>>table_save[i][j];
+			} 
+		}
 	}
-	else {
-		cout << "ERROR FILE_OPEN";
+	else{
+		cout<<"Blad otwierania pliku savefile.txt";
 	}
 	
 	file.close();
@@ -78,8 +68,8 @@ namespace{
 	
 	
 		}
-		else {
-			cout << "ERROR SIZE_CLOSE";
+		else{
+			cout<<"Blad wczytywania pliku.";
 		}
 		
 		size_file_close.close();
@@ -90,29 +80,20 @@ namespace{
 	
 		fstream file_close;
 		file_close.open("savefile.txt", ios::out | ios::trunc);
-	
-		
+
 		if(file_close.good()){
 	
 			for(int i=0; i< size_line; i++){
 				for(int j=0; j< size_column; j++){
 			
-					file_close << table_save[i][j];
-					file_close << " ";
-	
-	
-	
-				}
-			//file_close << endl;	
-				
-				
-			
+					file_close<<table_save[i][j];
+					file_close<<" ";
+				}	
 			}
 		}
-		else {
-			cout << "ERROR FILE_CLOSE";
-		}
-		
+		else{
+			cout<<"Blad wczytywania pliku.";
+		}	
 		file_close.close();
 	}
 }

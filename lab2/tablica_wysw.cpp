@@ -11,7 +11,7 @@ namespace {
 		int rr2= *r2;
 		
 			int wyb;
-			cout<<"Wybierz 1, by wyswietlic wszystkie elementy tbalicy lub 2 by wybrany element.\n";
+			cout<<"Wybierz 1, by wyswietlic wszystkie elementy tabeli lub 2 by wybrany element.\n";
 			cin>>wyb;
 
 			switch(wyb){
