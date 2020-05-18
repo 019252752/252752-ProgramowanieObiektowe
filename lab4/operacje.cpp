@@ -10,13 +10,13 @@ void addition_line (Tablica & tab){
 	int control=1;
 	
 	cout << endl << "W tablicy znajduje sie " << tab.line << " wierszy.";
-	cout << endl << "Wybierz wiersz do zsumowania.";
+	cout << endl << "Ktory wiersz chcesz zsumowac?";
 	cout << endl << "Nr wiersza: ";
 	cin >> nr_line;
 	
 	while(control!=0){	
 		if(nr_line < 0 || nr_line > tab.line){
-			cout <<endl <<"Niepoprawny numer wiersza. ";
+			cout <<endl <<" Nie ma takiego wiersza, wprowadz poprawny numer: ";
 			cin >> nr_line;
 		}
 		else{
@@ -37,13 +37,13 @@ void addition_column (Tablica & tab){
 	int control=1;
 	
 	cout << endl << "W tablicy znajduje sie " << tab.column << " kolumn.";
-	cout << endl << "Wybierz kolumne do zsumowania.";
+	cout << endl << "Ktora kolumne chcesz zsumowac?";
 	cout << endl << "Nr kolumny: ";
 	cin >> nr_column;
 	
 	while(control!=0){	
 		if(nr_column < 0 || nr_column > tab.column){
-			cout <<endl <<"Niepoprawny numer kolumny. ";
+			cout <<endl <<"Nie ma takiej kolumny, wprowadz poprawny numer: ";
 			cin >> nr_column;
 		}
 		else{

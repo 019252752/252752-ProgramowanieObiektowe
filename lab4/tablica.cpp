@@ -4,7 +4,7 @@
 
 using namespace std;
 	
-void creating_table(Tablica & tab){
+void tablica_powstanie(Tablica & tab){
 	
 	float** tablica = new float* [tab.line];
 	for (int i = 0; i < tab.column; i++){
@@ -37,7 +37,7 @@ void removing_table(Tablica & tab){
 	delete[] tab.tablica_str;
 }
 	
-void table_size(int old1, int old2, Tablica & tab){
+void tablica_rozmiar(int old1, int old2, Tablica & tab){
 
 	if (tab.line>=old1 || tab.column>=old2){
 		float** tab_copy = new float* [tab.line];
@@ -69,39 +69,39 @@ void table_size(int old1, int old2, Tablica & tab){
 		delete[] tab_copy;
 	}
 	else{
-		cout << endl << "Podaj nowe wieksze wymiary." << endl;
+		cout << endl << "Nowe wymiary musza byc wieksze  od poprzednich!" << endl;
 	}
 }
 
-void updating(Tablica & tab){
+void aktualizowanie(Tablica & tab){
 
 	int wiersz, kolumna;
 	int koniec = 0;
 		
-	cout << "Rozmiar obecnej tablicy: " << tab.line << "x" << tab.column << endl;
+	cout << "Rozmiar obecnej tablicy to: " << tab.line << "x" << tab.column << endl;
 
 	while (koniec == 0){
 
 		cout << "Ktory element tablicy chcesz edytowac?" << endl;
-		cout << "Numer wiersza: ";
+		cout << "Wpisz numer wiersza: ";
 
 		cin >> wiersz;
 		while (wiersz  < 0 || wiersz > tab.line){
-			cout << "Niepoprawny numer wiersza. ";
+			cout << "Nie ma takiego wiersza! Wprowadz numer wiersza ponownie: ";
 			cin >> wiersz;
 		}
-		cout << "Numer kolumny: ";
+		cout << "Wpisz numer kolumny: ";
 		cin >> kolumna;
 		while (kolumna < 0 || kolumna > tab.column){
-			cout << "Nipoprawny numer kolumny. ";
+			cout << "Nie ma takiej kolumny! Wprowadz numer kolumny ponownie: ";
 			cin >> kolumna;
 
 		}
-		cout << "Wartosc komorki: " << tab.tablica_str[wiersz][kolumna] << endl;
+		cout << "W tej komorce znajduje sie: " << tab.tablica_str[wiersz][kolumna] << endl;
 		cout << "Wprowadz nowa wartosc: ";
 		cin >> tab.tablica_str[wiersz][kolumna];
 
-		cout << endl << "Wybierz 1. by edytowac dalej lub dowolny inny przycisk, by skonczyc edytowanie. ";
+		cout << endl << "Czy chcesz zakonczyc edycje? Jezeli tak wcisnij 1, jezeli nie kliknij dowolny inny przycisk. ";
 		cin >> koniec; 
 
 		if (koniec == 1){

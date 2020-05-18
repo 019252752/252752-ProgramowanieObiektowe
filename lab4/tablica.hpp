@@ -5,14 +5,14 @@
 
 float const zero = 0;
 
-void creating_table(Tablica & tab);
+void tablica_powstanie(Tablica & tab);
 
 void filling(Tablica & tab);
 
 void removing_table(Tablica & tab);
 
-void table_size(int old1, int old2, Tablica & tab);
+void tablica_rozmiar(int old1, int old2, Tablica & tab);
 
-void updating(Tablica & tab);
+void aktualizowanie(Tablica & tab);
 
 #endif

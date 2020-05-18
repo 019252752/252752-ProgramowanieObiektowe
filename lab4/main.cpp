@@ -16,7 +16,7 @@ Tablica arr;
 int main(){
 
 	size_open(arr);
-	creating_table(arr);
+	tablica_powstanie(arr);
 	filling(arr);
 	file_open(arr);
 
@@ -27,19 +27,19 @@ int main(){
 			case 1:
 				removing_table(arr);
 				how(arr);
-				creating_table(arr);
+				tablica_powstanie(arr);
 				break;
 			case 2:
 				oldsize1=arr.line;
 				oldsize2=arr.column;
 				how(arr);
-				table_size(oldsize1, oldsize2, arr);
+				tablica_rozmiar(oldsize1, oldsize2, arr);
 				break;
 			case 3:
-				updating(arr);
+				aktualizowanie(arr);
 				break;
 			case 4:
-				showing_table(arr);
+				wyswietlanie(arr);
 				break;
 			case 5:
 				switch(menu_operations()){

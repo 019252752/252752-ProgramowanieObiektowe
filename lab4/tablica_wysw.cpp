@@ -4,10 +4,10 @@
 
 using namespace std;
 	
-void showing_table(Tablica & tab) {
+void wyswietlanie(Tablica & tab) {
 		
 	int wyb;
-	cout << "Wybierz 1. by wyswietlic wszystkie elementy lub 2. by jeden konkretny." << endl <<
+	cout << "Chcesz wyswietlic wszystkie elementy, czy wybrany pojedynczy?" << endl <<
 		"1. Wszystkie" << endl << "2. Wybrany" << endl;
 
 	cin >>wyb;
@@ -43,13 +43,13 @@ void showing_table(Tablica & tab) {
 			cout << "Wprowadz wspolrzedne:" << endl << "Wiersz: ";
 			cin >> x;
 			while (x<1 || x>tab.line){
-				cout << endl << "Niepoprawny nr wiersza. ";
+				cout << endl << "Nie ma takiej wspolrzednej, wprowadz poprawna: ";
 				cin >> x;
 			}
 			cout << endl << "Kolumna: ";
 			cin >> y;
 			while (y<1 || y>tab.column){
-				cout << endl << "Niepoprawny nr kolumny. ";
+				cout << endl << "Nie ma takiej wspolrzednej, wprowadz poprawna: ";
 				cin >> y;
 			}
 			cout << tab.tablica_str[x][y];

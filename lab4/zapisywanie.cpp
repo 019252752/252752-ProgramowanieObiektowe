@@ -20,7 +20,7 @@ void size_open(Tablica & tab){
 		tab.column=y;
 	}
 	else{
-		cout << "Blad otwarcia size.txt";
+		cout << "ERROR SIZE_OPEN";
 	}	
 	size_file.close();	
 }
@@ -43,7 +43,7 @@ void file_open(Tablica & tab){
 		}
 	}
 	else{
-		cout << "Blad otwarcia savefile.txt";
+		cout << "ERROR FILE_OPEN";
 	}
 	file.close();
 }
@@ -61,7 +61,7 @@ void size_close(Tablica & tab){
 	
 	}
 	else{
-		cout << "Blad zamkniecia size.txt";
+		cout << "ERROR SIZE_CLOSE";
 	}
 	size_file_close.close();
 }	
@@ -82,7 +82,7 @@ void file_close(Tablica & tab){
 		}
 	}
 	else{
-		cout << "Blad zamkniecia savefile.txt";
+		cout << "ERROR FILE_CLOSE";
 	}
 		
 	file_close.close();

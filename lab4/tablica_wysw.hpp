@@ -3,6 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-void showing_table(Tablica & tab);
+void wyswietlanie(Tablica & tab);
 
 #endif

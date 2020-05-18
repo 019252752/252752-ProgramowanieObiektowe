@@ -7,15 +7,14 @@ using namespace std;
 int menu(){
 
 	int m=0;
-		
-	cout << endl <<"MENU" << endl;
-	cout << "WYBIERZ NUMER OPERACJI KTORA CHCESZ WYKONAC, WCISNIJ ENTER BY POTWIERDZIC: " << endl;
-	cout << "1. Stworz nowa tabele (poprzednia zostanie usunieta)" << endl <<
-		"2. Zmien rozmiar istniejacej tabeli" << endl <<
-		"3. Aktualizuj istniejace elementy w tabeli" << endl <<
-		"4. Wyswietl zawartosc tabeli" << endl
-		<< "5. Operacje matematyczne" << endl
-		<< "6. Zakoncz program" << endl;
+	
+	cout << "Wybierz:" << endl;
+	cout << "1. By stworzyc nowa tabele (poprzednia zostanie usunieta)," << endl <<
+		"2. By zmienic rozmiar istniejacej tabeli," << endl <<
+		"3. By zaktualizowac istniejace elementy w tabeli," << endl <<
+		"4. By wyswietlic zawartosc tabeli," << endl
+		<< "5. By wykonac operacje matematyczne," << endl
+		<< "6. By zakonczyc program." << endl;
 
 	cin >> m;				
 	return m;
@@ -31,7 +30,7 @@ void how(Tablica & tab){
 		cin >> z;
 		
 		if(z<1){
-			cout << endl << "Wprowadzono bledno wartosc, wpisz poprawna jeszcze raz." <<  endl;
+			cout << endl << "Niepoprana ilosc, podaj inna." <<  endl;
 			
 		}
 		
@@ -43,7 +42,7 @@ void how(Tablica & tab){
 		cin >> w;
 				
 		if(w<1){
-			cout << endl << "Wprowadzono bledno wartosc, wpisz poprawna jeszcze raz." <<  endl;
+			cout << endl << "Niepoprana ilosc podaj." <<  endl;
 		}
 	}
 	tab.line=z;
@@ -55,12 +54,13 @@ int menu_operations(){
 	
 	int m;
 	
-	cout << "1. Zsumuj elementy w wybranym wierszu." << endl 
-	<< "2. Zsumuj elementy w wybranej kolumnie."<< endl
-	<< "3. Znajdz najmniejszy element w tabeli" << endl
-	<< "4. Znajdz najwiekszy element w tabeli" << endl 
-	<<  "5. Policz srednia wszystkich elementow" << endl
-	<< "Wcisnij 6 zeby wrocic do menu" << endl;
+	cout << "Wybierz:" << endl;
+	cout << "1. By zsumowac elementy w wybranym wierszu." << endl 
+	<< "2. By Zsumowac elementy w wybranej kolumnie."<< endl
+	<< "3. By znalezc najmniejszy element w tabeli" << endl
+	<< "4. By znalezc najwiekszy element w tabeli" << endl 
+	<<  "5. By policzyc srednia wszystkich elementow" << endl
+	<< "6. By wrocic do menu" << endl;
 	
 	cin >> m;
 	
