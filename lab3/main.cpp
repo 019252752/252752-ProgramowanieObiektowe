@@ -1,9 +1,9 @@
-#include "main.h"
-#include "tablica.h"
-#include "tablica_wysw.h"
-#include "menu.h"
-#include "zapisywanie.h"
-#include "operations.h"
+#include "main.hpp"
+#include "tablica.hpp"
+#include "tablica_wysw.hpp"
+#include "menu.hpp"
+#include "zapisywanie.hpp"
+#include "operations.hpp"
 
 using namespace std;
 
