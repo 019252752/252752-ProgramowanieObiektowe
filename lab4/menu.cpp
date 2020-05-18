@@ -1,85 +1,70 @@
+#include "main.h"
 #include "menu.h"
+#include <iostream>
 
-Menu::Menu(Array* new_array) {
-	array = new_array;
+using namespace std;
+
+int menu(){
+
+	int m=0;
+		
+	cout << endl <<"MENU" << endl;
+	cout << "WYBIERZ NUMER OPERACJI KTORA CHCESZ WYKONAC, WCISNIJ ENTER BY POTWIERDZIC: " << endl;
+	cout << "1. Stworz nowa tabele (poprzednia zostanie usunieta)" << endl <<
+		"2. Zmien rozmiar istniejacej tabeli" << endl <<
+		"3. Aktualizuj istniejace elementy w tabeli" << endl <<
+		"4. Wyswietl zawartosc tabeli" << endl
+		<< "5. Operacje matematyczne" << endl
+		<< "6. Zakoncz program" << endl;
+
+	cin >> m;				
+	return m;
 }
 
-void Menu::dataChangeMenu(void) {
-	  int xPos,					// Position in a row
-	  		yPos,				// Position in a collumn
-	  		new_data;			// New data
-
-	  cout << "Row number : " << endl;
-	  cin >> yPos;
-	  cout << "Column number : " << endl;
-	  cin >> xPos;
-	  cout << "New data in the cell" << endl;
-	  cin >> new_data;
-
-		// Ask user about new values
-	  array->changeData(xPos, yPos, new_data);
-}
-
-void Menu::sizeChangeMenu(void) {
-	int new_width,			// New width
-		new_height;			// New height
-
-	// Ask user about new values
-	cout << "New length" << endl;
-	cin >> new_width;
-	cout << "New width" << endl;
-	cin >> new_height;
-
-	// Call a corresponding function
-	array->changeSize(new_width, new_height);
-}
-
-void Menu::print(void) {
-	cout << "========= MENU =========" << endl;
-	cout << "1.Change size (initial)" << endl;
-	cout << "2.Change data of a specific cell" << endl;
-	cout << "3.Display the array" << endl;
-	cout << "4.Write data into a file" << endl;
-	cout << "5.Read data from the file" << endl;
-	cout << endl;
-}
-
-char Menu::ask(void) {
-	char choice;								// Temporary variable to store user's choice
-
-	// Commad prompt
-	cout << "Enter your choice : ";
-	cin >> choice;
-
-	return choice;
-}
-
-int Menu::execute(char choice) {
-	// Execute corresponding function
-	switch(choice) {
-		case '1':
-			sizeChangeMenu();
-			break;
-
-		case '2':
-			dataChangeMenu();
-			break;
-
-		case '3':
-			array->display();
-			break;
-
-		case '4':
-			array->write();
-			break;
-
-		case '5':
-			array->read();
-			break;
-
-		default:
-			return 0;
+void how(Tablica & tab){
+	int z=0;
+	int w=0;
+		
+	while(z<1){
+			
+		cout << "Podaj ilosc wierszy: ";
+		cin >> z;
+		
+		if(z<1){
+			cout << endl << "Wprowadzono bledno wartosc, wpisz poprawna jeszcze raz." <<  endl;
+			
+		}
+		
 	}
-
-	return 1;
+		
+	while(w<1){
+								
+		cout << "Podaj ilosc kolumn: ";
+		cin >> w;
+				
+		if(w<1){
+			cout << endl << "Wprowadzono bledno wartosc, wpisz poprawna jeszcze raz." <<  endl;
+		}
+	}
+	tab.line=z;
+	tab.column=w;
 }
+
+
+int menu_operations(){
+	
+	int m;
+	
+	cout << "1. Zsumuj elementy w wybranym wierszu." << endl 
+	<< "2. Zsumuj elementy w wybranej kolumnie."<< endl
+	<< "3. Znajdz najmniejszy element w tabeli" << endl
+	<< "4. Znajdz najwiekszy element w tabeli" << endl 
+	<<  "5. Policz srednia wszystkich elementow" << endl
+	<< "Wcisnij 6 zeby wrocic do menu" << endl;
+	
+	cin >> m;
+	
+	return m;
+}
+
+		
