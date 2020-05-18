@@ -2,8 +2,7 @@
 #define main_hpp
 #include <iostream>
 
-struct Tablica    
-{
+struct Tablica{
 	
 	float** tablica_str;
 	int line;
