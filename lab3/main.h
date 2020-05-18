@@ -1,5 +1,5 @@
-#ifndef main_h
-#define main_h
+#ifndef main_hpp
+#define main_hpp
 #include <iostream>
 
 struct Tablica    
