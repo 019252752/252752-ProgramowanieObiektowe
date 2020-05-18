@@ -21,4 +21,3 @@ koncze lab3
 # lab4
 
 zaczynam lab4
-sprawdzam lab4
