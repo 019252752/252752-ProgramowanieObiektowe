@@ -16,7 +16,7 @@ Tablica arr;
 int main(){
 
 	size_open(arr);
-	table_create(arr);
+	tablica_powstanie(arr);
 	filling(arr);
 	file_open(arr);
 
@@ -27,7 +27,7 @@ int main(){
 			case 1:
 				removing_table(arr);
 				how(arr);
-				table_create(arr);
+				tablica_powstanie(arr);
 				break;
 			case 2:
 				oldsize1=arr.line;
