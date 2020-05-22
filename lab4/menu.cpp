@@ -15,8 +15,11 @@ void Menu::dataChangeMenu(void){
 	cin>>new_data;
 
 	array->changeData(xPos, yPos, new_data);
+
 	check=changeData(xPos, yPos, new_data);
-	if(check==1) cout<<"Podales bledna wartosc kolumny lub wiersza."<<endl;
+	if(check==1){
+		cout<<"Podales bledna wartosc kolumny lub wiersza."<<endl;
+	}
 }
 
 void Menu::sizeChangeMenu(void){
@@ -29,7 +32,9 @@ void Menu::sizeChangeMenu(void){
 
 	array->changeSize(new_width, new_height);
 	check=changeSize(new_width, new_height);
-	if(check==1) cout<<"Podales nieprawidlowa wysokosc lub szerokosc."<<endl;
+	if(check==1){
+		cout<<"Podales nieprawidlowa wysokosc lub szerokosc."<<endl;
+	}
 }
 
 void Menu::print(void){
