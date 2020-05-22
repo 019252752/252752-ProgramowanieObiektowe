@@ -1,5 +1,5 @@
-#include "main.h"
-#include "zapisywanie.h"
+#include "main.hpp"
+#include "zapisywanie.hpp"
 #include <iostream>
 
 using namespace std;

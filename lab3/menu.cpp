@@ -1,5 +1,5 @@
-#include "main.h"
-#include "menu.h"
+#include "main.hpp"
+#include "menu.hpp"
 #include <iostream>
 
 using namespace std;

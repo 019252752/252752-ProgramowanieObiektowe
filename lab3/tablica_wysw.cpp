@@ -1,5 +1,5 @@
-#include "main.h"
-#include "tablica_wysw.h"
+#include "main.hpp"
+#include "tablica_wysw.hpp"
 #include <iostream>
 
 using namespace std;

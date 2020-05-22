@@ -1,5 +1,5 @@
-#include "main.h"
-#include "tablica.h"
+#include "main.hpp"
+#include "tablica.hpp"
 #include <iostream>
 
 using namespace std;

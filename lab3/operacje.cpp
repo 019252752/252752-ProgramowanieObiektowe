@@ -1,5 +1,5 @@
-#include "main.h"
-#include "operacje.h"
+#include "main.hpp"
+#include "operacje.hpp"
 #include <iostream>
 
 using namespace std;
