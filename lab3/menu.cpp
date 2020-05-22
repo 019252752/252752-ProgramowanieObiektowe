@@ -20,7 +20,7 @@ int menu(){
 	return m;
 }
 
-void how(Tablica & tab){
+void how(Tablica **tab){
 	int z=0;
 	int w=0;
 		

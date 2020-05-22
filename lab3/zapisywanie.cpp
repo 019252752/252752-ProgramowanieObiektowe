@@ -4,7 +4,7 @@
 
 using namespace std;
 	
-void size_open(Tablica & tab){
+void size_open(Tablica **tab){
 	
 	int x, y;
 	
@@ -25,7 +25,7 @@ void size_open(Tablica & tab){
 	size_file.close();	
 }
 	
-void file_open(Tablica & tab){
+void file_open(Tablica **tab){
 	
 	float bufor;
 	
@@ -48,7 +48,7 @@ void file_open(Tablica & tab){
 	file.close();
 }
 	
-void size_close(Tablica & tab){
+void size_close(Tablica **tab){
 	
 	fstream size_file_close;
 	size_file_close.open("size.txt", ios::out | ios::trunc);
@@ -66,7 +66,7 @@ void size_close(Tablica & tab){
 	size_file_close.close();
 }	
 
-void file_close(Tablica & tab){
+void file_close(Tablica **tab){
 	
 	fstream file_close;
 	file_close.open("savefile.txt", ios::out | ios::trunc);

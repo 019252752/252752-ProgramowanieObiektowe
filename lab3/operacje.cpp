@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void addition_line (Tablica & tab){
+void addition_line (Tablica **tab){
 	int nr_line;
 	int sum=0;
 	int control=1;
@@ -31,7 +31,7 @@ void addition_line (Tablica & tab){
 	cout << endl <<"Suma elementow tego wiersza wynosi: " << sum;
 }
 
-void addition_column (Tablica & tab){
+void addition_column (Tablica **tab){
 	int nr_column;
 	int sum=0;
 	int control=1;
@@ -58,7 +58,7 @@ void addition_column (Tablica & tab){
 	cout << endl <<"Suma elementow tej kolumny wynosi: " << sum;
 }
 
-void minimum (Tablica & tab){
+void minimum (Tablica **tab){
 	
 	int min=tab.tablica_str[0][0];
 	int min_line;
@@ -77,7 +77,7 @@ void minimum (Tablica & tab){
 	cout <<endl << "Najmniejszy element to: " << min << ". Znajduje sie w: " << min_line << "x" << min_column;				
 }		
 	
-void maximum (Tablica & tab){
+void maximum (Tablica **tab){
 	
 	int max=tab.tablica_str[0][0];
 	int max_line;
@@ -96,7 +96,7 @@ void maximum (Tablica & tab){
 	cout <<endl << "Najwiekszy element to: " << max << ". Znajduje sie w: " << max_line << "x" << max_column;				
 }
 	
-void average (Tablica & tab){
+void average (Tablica **tab){
 	
 	float sum=0;
 	

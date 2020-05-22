@@ -4,7 +4,7 @@
 
 using namespace std;
 	
-void showing_table(Tablica & tab) {
+void showing_table(Tablica **tab) {
 		
 	int wyb;
 	cout << "Wybierz 1. by wyswietlic wszystkie elementy lub 2. by jeden konkretny." << endl <<

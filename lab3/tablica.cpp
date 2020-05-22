@@ -4,7 +4,7 @@
 
 using namespace std;
 	
-void creating_table(Tablica & tab){
+void creating_table(Tablica **tab){
 	
 	float** tablica = new float* [tab.line];
 	for (int i = 0; i < tab.column; i++){
@@ -20,7 +20,7 @@ void creating_table(Tablica & tab){
 	tab.tablica_str=tablica;
 }	
 
-void filling(Tablica & tab){
+void filling(Tablica **tab){
 	
 	for (int i = 0; i < tab.line; i++){
 		 for (int j = 0; j < tab.column; j++){ 
@@ -29,7 +29,7 @@ void filling(Tablica & tab){
 	 }	
 }
 
-void removing_table(Tablica & tab){
+void removing_table(Tablica **tab){
 		
 	for (int i = 0; i < tab.line ; i++){
 		delete[] tab.tablica_str[i];
@@ -37,7 +37,7 @@ void removing_table(Tablica & tab){
 	delete[] tab.tablica_str;
 }
 	
-void table_size(int old1, int old2, Tablica & tab){
+void table_size(int old1, int old2, Tablica **tab){
 
 	if (tab.line>=old1 || tab.column>=old2){
 		float** tab_copy = new float* [tab.line];
@@ -73,7 +73,7 @@ void table_size(int old1, int old2, Tablica & tab){
 	}
 }
 
-void updating(Tablica & tab){
+void updating(Tablica **tab){
 
 	int wiersz, kolumna;
 	int koniec = 0;

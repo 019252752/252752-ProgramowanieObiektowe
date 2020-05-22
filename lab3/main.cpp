@@ -8,12 +8,12 @@
 
 using namespace std;
 
-int oldsize1, oldsize2, choice;
-int loop=1;
-
-Tablica arr;
-
 int main(){
+
+	int oldsize1, oldsize2, choice;
+	int loop=1;
+
+	Tablica **arr;
 
 	size_open(arr);
 	creating_table(arr);
@@ -44,19 +44,19 @@ int main(){
 			case 5:
 				switch(menu_operations()){
 					case 1:	
-						addition_line (arr);
+						addition_line(arr);
 						break;
 					case 2:
-						addition_column (arr);
+						addition_column(arr);
 						break;
 					case 3:
-						minimum (arr);
+						minimum(arr);
 						break;
 					case 4:
-						maximum (arr);
+						maximum(arr);
 						break;
 					case 5:
-						average (arr);
+						average(arr);
 						break;
 					default:
 						break;
