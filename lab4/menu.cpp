@@ -1,85 +1,79 @@
 #include "menu.h"
 
-Menu::Menu(Array* new_array) {
-	array = new_array;
+Menu::Menu(Array* new_array){
+	array=new_array;
 }
 
-void Menu::dataChangeMenu(void) {
-	  int xPos,					// Position in a row
-	  		yPos,				// Position in a collumn
-	  		new_data;			// New data
+void Menu::dataChangeMenu(void){
+	int xPos, yPos, new_data, check;
 
-	  cout << "Row number : " << endl;
-	  cin >> yPos;
-	  cout << "Column number : " << endl;
-	  cin >> xPos;
-	  cout << "New data in the cell" << endl;
-	  cin >> new_data;
+	cout<<"Numer kolumny:"<<endl;
+	cin>>yPos;
+	cout<<"Numer wiersza:"<<endl;
+	cin>>xPos;
+	cout<<"Podaj nowa wartosc:"<<endl;
+	cin>>new_data;
 
-		// Ask user about new values
-	  array->changeData(xPos, yPos, new_data);
+	array->changeData(xPos, yPos, new_data);
+	check=changeData(xPos, yPos, new_data);
+	if(check==1) cout<<"Podales bledna wartosc kolumny lub wiersza."<<endl;
 }
 
-void Menu::sizeChangeMenu(void) {
-	int new_width,			// New width
-		new_height;			// New height
+void Menu::sizeChangeMenu(void){
+	int new_width, new_height, check;
 
-	// Ask user about new values
-	cout << "New length" << endl;
+	cout<<"Podaj nowa wysokosc:"<<endl;
 	cin >> new_width;
-	cout << "New width" << endl;
+	cout << "Podaj nowa szerokosc:" << endl;
 	cin >> new_height;
 
-	// Call a corresponding function
 	array->changeSize(new_width, new_height);
+	check=changeSize(new_width, new_height);
+	if(check==1) cout<<"Podales nieprawidlowa wysokosc lub szerokosc."<<endl;
 }
 
-void Menu::print(void) {
-	cout << "========= MENU =========" << endl;
-	cout << "1.Change size (initial)" << endl;
-	cout << "2.Change data of a specific cell" << endl;
-	cout << "3.Display the array" << endl;
-	cout << "4.Write data into a file" << endl;
-	cout << "5.Read data from the file" << endl;
-	cout << endl;
+void Menu::print(void){
+	cout<<"MENU:"<<endl;
+	cout<<"1.Zmien wielkosc."<<endl;
+	cout<<"2.Zmien wartosc komorki."<<endl;
+	cout<<"3.Wyswietl."<<endl;
+	cout<<"4.Zapisz do pliku."<<endl;
+	cout<<"5.Wczytaj dane z pliku."<<endl;
+	cout<<endl;
 }
 
-char Menu::ask(void) {
-	char choice;								// Temporary variable to store user's choice
-
-	// Commad prompt
-	cout << "Enter your choice : ";
-	cin >> choice;
+int Menu::ask(void){
+	int choice;
+	cout<<"Podaj wybor: ";
+	cin>>choice;
 
 	return choice;
 }
 
-int Menu::execute(char choice) {
-	// Execute corresponding function
+int Menu::execute(int choice){
 	switch(choice) {
-		case '1':
+		case 1:
 			sizeChangeMenu();
 			break;
 
-		case '2':
+		case 2:
 			dataChangeMenu();
 			break;
 
-		case '3':
+		case 3:
 			array->display();
 			break;
 
-		case '4':
+		case 4:
 			array->write();
 			break;
 
-		case '5':
+		case 5:
 			array->read();
 			break;
 
 		default:
 			return 0;
 	}
-
 	return 1;
 }

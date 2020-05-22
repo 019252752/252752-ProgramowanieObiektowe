@@ -16,8 +16,10 @@ prawie gotowe
 # lab3
 
 na razie folder
-koncze lab3
+zaczynam lab3
+problemy z lab3
 
 # lab4
 
 zaczynam lab4
+robie lab4

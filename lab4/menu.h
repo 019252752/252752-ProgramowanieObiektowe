@@ -2,24 +2,22 @@
 #define Menu_h
 
 #include <iostream>
-#include "array.h"
+#include "Array_class.h"
 
 using namespace std;
 
-class Menu {
+class Menu{
 private:
   Array* array;
 
-  void sizeChangeMenu(void);      // Change size submenu
-  void dataChangeMenu(void);      // Change data submenu
+  void sizeChangeMenu(void);
+  void dataChangeMenu(void);
 
 public:
   Menu(Array*);
 
-  char ask(void);					// Ask user
-  void print(void);					// Print menu entries
-  int execute(char);				// Start executing the main sequence
+  int ask(void);
+  void print(void);
+  int execute(char);
 };
-
-
 #endif

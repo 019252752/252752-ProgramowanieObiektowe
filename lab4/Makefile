@@ -8,8 +8,8 @@ clean :
 	mkdir build
 	rm -f file.txt
 
-build/array.o : array.cpp array.h
-	$(CXX) $(CXXFLAGS) array.cpp -o $@
+build/array.o : Array_class.cpp Array_class.h
+	$(CXX) $(CXXFLAGS) Array_class.cpp -o $@
 
 build/menu.o : menu.cpp menu.h
 	$(CXX) $(CXXFLAGS) menu.cpp -o $@
@@ -17,5 +17,5 @@ build/menu.o : menu.cpp menu.h
 build/main.o :
 	$(CXX) $(CXXFLAGS) main.cpp  -o $@
 
-build/main.out : build/main.o build/menu.o build/array.o
+build/main.out : build/main.o build/menu.o build/Array_class.o
 	$(CXX) $^ -o $@
