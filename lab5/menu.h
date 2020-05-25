@@ -2,24 +2,24 @@
 #define Menu_h
 
 #include <iostream>
-#include "array.h"
+#include "Array_class.h"
 
 using namespace std;
 
 template <class Type>
-class Menu final {
-private:
-  Array<Type>* array;
+class Menu final{
+	private:
+  		Array<Type>* array;
 
-  void sizeChangeMenu(void);      // Change size submenu
-  void dataChangeMenu(void);      // Change data submenu
+  		void sizeChangeMenu(void);
+  		void dataChangeMenu(void);
 
-public:
-  Menu();
+	public:
+  		Menu();
 
-  int ask(void);					// Ask user
-  void print(void);					// Print menu entries
-  int execute(int);					// Start executing the main sequence
+  		int ask(void);
+  		void print(void);
+  		int execute(int);
 };
 
 
@@ -27,66 +27,68 @@ template <class Type>
 Menu<Type>::Menu() { array = new Array<Type>(); }
 
 template <class Type>
-void Menu<Type>::dataChangeMenu(void) {
-	int xPos,				// Position in a row
-	  	yPos;				// Position in a collumn
+void Menu<Type>::dataChangeMenu(void){
+	int xPos, yPos;
 
-	Type new_data;			// New data
+	Type new_data;
 
-	cout << "Row number : ";
+	cout << "Numer kolumny: ";
 	cin >> yPos;
-	cout << "Column number : ";
+	cout << "Numer wiersza: ";
 	cin >> xPos;
-	cout << "New data in the cell : ";
+	cout << "Podaj nowa wartosc: ";
 	cin >> new_data;
 
-	// Ask user about new values
 	array->changeData(xPos, yPos, new_data);
+
+	check=changeData(xPos, yPos, new_data);
+	if(check==1){
+		cout<<"Podales bledna wartosc kolumny lub wiersza."<<endl;
+	}
 }
 
 template <class Type>
-void Menu<Type>::sizeChangeMenu(void) {
-	int new_width,			// New width
-		new_height;			// New height
+void Menu<Type>::sizeChangeMenu(void){
+	int new_width, new_height, check;
 
-	// Ask user about new values
-	cout << "New length : " << endl;
+	cout << "Podaj nowa wysokosc: " << endl;
 	cin >> new_width;
-	cout << "New width : " << endl;
+	cout << "Podaj nowa szerokosc: " << endl;
 	cin >> new_height;
 
-	// Call a corresponding function
 	array->changeSize(new_width, new_height);
+
+	check=changeSize(new_width, new_height);
+	if(check==1){
+		cout<<"Podales nieprawidlowa wysokosc lub szerokosc."<<endl;
+	}
 }
 
 template <class Type>
-void Menu<Type>::print(void) {
+void Menu<Type>::print(void){
 	cout << endl;
-	cout << "========= MENU =========" << endl;
-	cout << "0.Exit the program" << endl;
-	cout << "1.Change size (initial)" << endl;
-	cout << "2.Change data of a specific cell" << endl;
-	cout << "3.Display the array" << endl;
-	cout << "4.Write data into a file" << endl;
-	cout << "5.Read data from the file" << endl;
+	cout << "MENU:" << endl;
+	cout << "0.Zakoncz program." << endl;
+	cout << "1.Zmien wielkosc." << endl;
+	cout << "2.Zmien wartosc komorki." << endl;
+	cout << "3.Wyswietl." << endl;
+	cout << "4.Zapisz do pliku." << endl;
+	cout << "5.Wczytaj z pliku." << endl;
 	cout << endl;
 }
 
 template <class Type>
-int Menu<Type>::ask(void) {
-	int choice;								// Temporary variable to store user's choice
-
-	// Commad prompt
-	cout << "Enter your choice : ";
+int Menu<Type>::ask(void){
+	int choice;
+	cout << "Podaj wybor: ";
 	cin >> choice;
 
 	return choice;
 }
 
 template <class Type>
-int Menu<Type>::execute(int choice) {
-	// Execute corresponding function
-	switch(choice) {
+int Menu<Type>::execute(int choice){
+	switch(choice){
 		case 0:
 			return 0;
 
@@ -110,8 +112,6 @@ int Menu<Type>::execute(int choice) {
 			array->read();
 			break;
 	}
-
 	return 1;
 }
-
 #endif

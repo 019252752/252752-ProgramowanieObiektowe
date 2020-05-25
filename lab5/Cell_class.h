@@ -4,16 +4,16 @@
 #include <iostream>
 
 template <class Type>
-class Cell final {
-private:
-	Type data;
+class Cell final{
+	private:
+		Type data;
 
-public:
-	Type getData(void);
-	void setData(Type);
+	public:
+		Type getData(void);
+		void setData(Type);
 
-	template <typename SecondType>
-	friend std::ostream& operator<<( std::ostream&, const Cell<SecondType>& );
+		template <typename SecondType>
+		friend std::ostream& operator<<( std::ostream&, const Cell<SecondType>& );
 };
 
 template <class Type>
@@ -26,7 +26,6 @@ template <class Type>
 std::ostream& operator<<(std::ostream& os, const Cell<Type>& object) {
 	os << object.data;
 
-    return os;
+	return os;
 }
-
-#endif	//CELL_H
+#endif
