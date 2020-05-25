@@ -17,7 +17,7 @@ int Array::changeSize(int new_width, int new_height){
 	int** column_ptr = new int*[new_height];
 	int* row_ptr;
 
-	if(xPos<0 || yPos<0) return 1;
+	if(new_width<0 || new_height<0) return 1;
 
 	else{
 		for(int column=0; column<columns; ++column){
