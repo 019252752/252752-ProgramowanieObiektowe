@@ -23,3 +23,17 @@ problemy z lab3
 
 zaczynam lab4
 robie lab4
+
+# lab5
+
+zaczynam
+robie lab5
+
+# lab6
+
+Zaczynam
+robie
+
+# poprawa
+
+staram sie poprawic bledy we wczesniejszych labach
