@@ -2,55 +2,51 @@
 #define Menu_h
 
 #include <iostream>
-#include "array.h"
+#include "Array_class.h"
 
 using namespace std;
 
 template <class FirstType, class SecondType, class ThirdType>
-class Menu final {
-private:
-  Array<FirstType>* firstTypeArray;		// First colomn
-  Array<SecondType>* secondTypeArray;	// Second columns
-  Array<ThirdType>* thirdTypeArray;		// Third column
+class Menu final{
+	private:
+  		Array<FirstType>* firstTypeArray;
+  		Array<SecondType>* secondTypeArray;
+  		Array<ThirdType>* thirdTypeArray;
 
-  void sizeChangeMenu(void);      // Change size submenu
-  void dataChangeMenu(void);      // Change data submenu
+  		void sizeChangeMenu(void);
+  		void dataChangeMenu(void);
 
-public:
-  Menu();
+	public:
+  		Menu();
 
-  int ask(void);					// Ask user
-  void print(void);					// Print menu entries
-  int execute(int);					// Start executing the main sequence
+  		int ask(void);
+  		void print(void);
+  		int execute(int);
 };
 
 
 template <class FirstType, class SecondType, class ThirdType>
-Menu<FirstType, SecondType, ThirdType>::Menu() {
+Menu<FirstType, SecondType, ThirdType>::Menu(){
 	firstTypeArray = new Array<FirstType>();
 	secondTypeArray = new Array<SecondType>();
 	thirdTypeArray = new Array<ThirdType>();
 }
 
 template <class FirstType, class SecondType, class ThirdType>
-void Menu<FirstType, SecondType, ThirdType>::dataChangeMenu(void) {
-	int xPos,				// Position in a row
-	  	yPos;				// Position in a collumn
+void Menu<FirstType, SecondType, ThirdType>::dataChangeMenu(void){
+	int xPos, yPos;
 
-	// New data
 	FirstType firstTypeData;
 	SecondType secondTypeData;
 	ThirdType thirdTypeData;
 
-
-	// Ask user about new values
-	cout << "Row number : ";
+	cout << "Numer kolumny: ";
 	cin >> yPos;
-	cout << "Column number : ";
+	cout << "Numer wiersza: ";
 	cin >> xPos;
-	cout << "New data in the cell : ";
+	cout << "Nowa dana: ";
 
-	switch (xPos) {
+	switch (xPos){
 		case 0:
 			cin >> firstTypeData;
 			firstTypeArray->changeData(xPos, yPos, firstTypeData);
@@ -67,19 +63,17 @@ void Menu<FirstType, SecondType, ThirdType>::dataChangeMenu(void) {
 			break;
 
 		default :
-			std::cout << "Re-enter a column number" << std::endl;
+			std::cout << "Podaj ponownie numer kolumny: " << std::endl;
 	}
 }
 
 template <class FirstType, class SecondType, class ThirdType>
 void Menu<FirstType, SecondType, ThirdType>::sizeChangeMenu(void) {
-	int new_width;			// New width
+	int new_width;
 
-	// Ask user about new values
-	cout << "New length : " << endl;
+	cout << "Podaj nowa szerokosc: " << endl;
 	cin >> new_width;
 
-	// Update size
 	firstTypeArray->changeSize(new_width);
 	secondTypeArray->changeSize(new_width);
 	thirdTypeArray->changeSize(new_width);
@@ -88,31 +82,29 @@ void Menu<FirstType, SecondType, ThirdType>::sizeChangeMenu(void) {
 template <class FirstType, class SecondType, class ThirdType>
 void Menu<FirstType, SecondType, ThirdType>::print(void) {
 	cout << endl;
-	cout << "========= MENU =========" << endl;
-	cout << "0.Exit the program" << endl;
-	cout << "1.Change size (initial)" << endl;
-	cout << "2.Change data of a specific cell" << endl;
-	cout << "3.Display the array" << endl;
-	cout << "4.Write data into a file" << endl;
-	cout << "5.Read data from the file" << endl;
+	cout << "MENU:" << endl;
+	cout << "0.Zakoncz program." << endl;
+	cout << "1.Zmien wielkosc." << endl;
+	cout << "2.Zmien wartosc komorki." << endl;
+	cout << "3.Wyswietl." << endl;
+	cout << "4.Zapisz do pliku." << endl;
+	cout << "5.Wczytaj z pliku." << endl;
 	cout << endl;
 }
 
 template <class FirstType, class SecondType, class ThirdType>
 int Menu<FirstType, SecondType, ThirdType>::ask(void) {
-	int choice;								// Temporary variable to store user's choice
+	int choice;
 
-	// Commad prompt
-	cout << "Enter your choice : ";
+	cout << "Podaj wybor: ";
 	cin >> choice;
 
 	return choice;
 }
 
 template <class FirstType, class SecondType, class ThirdType>
-int Menu<FirstType, SecondType, ThirdType>::execute(int choice) {
-	// Execute corresponding function
-	switch(choice) {
+int Menu<FirstType, SecondType, ThirdType>::execute(int choice){
+	switch(choice){
 		case 0:
 			return 0;
 
@@ -142,8 +134,6 @@ int Menu<FirstType, SecondType, ThirdType>::execute(int choice) {
 			thirdTypeArray->read();
 			break;
 	}
-
 	return 1;
 }
-
 #endif
