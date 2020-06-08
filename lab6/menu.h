@@ -34,7 +34,7 @@ Menu<FirstType, SecondType, ThirdType>::Menu(){
 
 template <class FirstType, class SecondType, class ThirdType>
 void Menu<FirstType, SecondType, ThirdType>::dataChangeMenu(void){
-	int xPos, yPos;
+	int xPos, yPos, check;
 
 	FirstType firstTypeData;
 	SecondType secondTypeData;
@@ -50,16 +50,28 @@ void Menu<FirstType, SecondType, ThirdType>::dataChangeMenu(void){
 		case 0:
 			cin >> firstTypeData;
 			firstTypeArray->changeData(xPos, yPos, firstTypeData);
+			check=changeData(xPos, yPos, new_data);
+			if(check==1){
+				cout<<"Podales bledna wartosc wiersza."<<endl;
+			}
 			break;
 
 		case 1:
 			cin >> secondTypeData;
 			secondTypeArray->changeData(xPos, yPos, secondTypeData);
+			check=changeData(xPos, yPos, new_data);
+			if(check==1){
+				cout<<"Podales bledna wartosc wiersza."<<endl;
+			}
 			break;
 
 		case 2:
 			cin >> thirdTypeData;
 			thirdTypeArray->changeData(xPos, yPos, thirdTypeData);
+			check=changeData(xPos, yPos, new_data);
+			if(check==1){
+				cout<<"Podales bledna wartosc wiersza."<<endl;
+			}
 			break;
 
 		default :
@@ -69,14 +81,19 @@ void Menu<FirstType, SecondType, ThirdType>::dataChangeMenu(void){
 
 template <class FirstType, class SecondType, class ThirdType>
 void Menu<FirstType, SecondType, ThirdType>::sizeChangeMenu(void) {
-	int new_width;
+	int new_width, check;
 
-	cout << "Podaj nowa szerokosc: " << endl;
+	cout << "Podaj nowa wysokosc: " << endl;
 	cin >> new_width;
 
 	firstTypeArray->changeSize(new_width);
 	secondTypeArray->changeSize(new_width);
 	thirdTypeArray->changeSize(new_width);
+
+	check=changeSize(new_width);
+	if(check==1){
+		cout<<"Podales nieprawidlowa wysokosc."<<endl;
+	}
 }
 
 template <class FirstType, class SecondType, class ThirdType>
