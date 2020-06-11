@@ -1,156 +1,35 @@
-#ifndef Menu_h
-#define Menu_h
-
+#ifndef menu_hpp_
+#define menu_hpp_
 #include <iostream>
-#include "Array_class.h"
+#include <fstream>
 
 using namespace std;
 
-template <class FirstType, class SecondType, class ThirdType>
-class Menu final{
-	private:
-  		Array<FirstType>* firstTypeArray;
-  		Array<SecondType>* secondTypeArray;
-  		Array<ThirdType>* thirdTypeArray;
 
-  		void sizeChangeMenu(void);
-  		void dataChangeMenu(void);
+int menu();
 
-	public:
-  		Menu();
+int typeMenu();
 
-  		int ask(void);
-  		void print(void);
-  		int execute(int);
-};
+void interface_type_choose();
 
+int menu_operations();
 
-template <class FirstType, class SecondType, class ThirdType>
-Menu<FirstType, SecondType, ThirdType>::Menu(){
-	firstTypeArray = new Array<FirstType>();
-	secondTypeArray = new Array<SecondType>();
-	thirdTypeArray = new Array<ThirdType>();
-}
+void interface(int x);
 
-template <class FirstType, class SecondType, class ThirdType>
-void Menu<FirstType, SecondType, ThirdType>::dataChangeMenu(void){
-	int xPos, yPos, check;
+void interface_aktualizowanie(int x);
 
-	FirstType firstTypeData;
-	SecondType secondTypeData;
-	ThirdType thirdTypeData;
+void interface_how(int x);
 
-	cout << "Numer kolumny: ";
-	cin >> yPos;
-	cout << "Numer wiersza: ";
-	cin >> xPos;
-	cout << "Nowa dana: ";
+void interface_wysw(int x);
 
-	switch (xPos){
-		case 0:
-			cin >> firstTypeData;
-			firstTypeArray->changeData(xPos, yPos, firstTypeData);
-			check=changeData(xPos, yPos, new_data);
-			if(check==1){
-				cout<<"Podales bledna wartosc wiersza."<<endl;
-			}
-			break;
+void interface_add(int x);
 
-		case 1:
-			cin >> secondTypeData;
-			secondTypeArray->changeData(xPos, yPos, secondTypeData);
-			check=changeData(xPos, yPos, new_data);
-			if(check==1){
-				cout<<"Podales bledna wartosc wiersza."<<endl;
-			}
-			break;
+void interface_min(int x);
 
-		case 2:
-			cin >> thirdTypeData;
-			thirdTypeArray->changeData(xPos, yPos, thirdTypeData);
-			check=changeData(xPos, yPos, new_data);
-			if(check==1){
-				cout<<"Podales bledna wartosc wiersza."<<endl;
-			}
-			break;
+void interface_max(int x);
 
-		default :
-			std::cout << "Podaj ponownie numer kolumny: " << std::endl;
-	}
-}
+void interface_av(int x);
 
-template <class FirstType, class SecondType, class ThirdType>
-void Menu<FirstType, SecondType, ThirdType>::sizeChangeMenu(void) {
-	int new_width, check;
+void operations_check(int x);
 
-	cout << "Podaj nowa wysokosc: " << endl;
-	cin >> new_width;
-
-	firstTypeArray->changeSize(new_width);
-	secondTypeArray->changeSize(new_width);
-	thirdTypeArray->changeSize(new_width);
-
-	check=changeSize(new_width);
-	if(check==1){
-		cout<<"Podales nieprawidlowa wysokosc."<<endl;
-	}
-}
-
-template <class FirstType, class SecondType, class ThirdType>
-void Menu<FirstType, SecondType, ThirdType>::print(void) {
-	cout << endl;
-	cout << "MENU:" << endl;
-	cout << "0.Zakoncz program." << endl;
-	cout << "1.Zmien wielkosc." << endl;
-	cout << "2.Zmien wartosc komorki." << endl;
-	cout << "3.Wyswietl." << endl;
-	cout << "4.Zapisz do pliku." << endl;
-	cout << "5.Wczytaj z pliku." << endl;
-	cout << endl;
-}
-
-template <class FirstType, class SecondType, class ThirdType>
-int Menu<FirstType, SecondType, ThirdType>::ask(void) {
-	int choice;
-
-	cout << "Podaj wybor: ";
-	cin >> choice;
-
-	return choice;
-}
-
-template <class FirstType, class SecondType, class ThirdType>
-int Menu<FirstType, SecondType, ThirdType>::execute(int choice){
-	switch(choice){
-		case 0:
-			return 0;
-
-		case 1:
-			sizeChangeMenu();
-			break;
-
-		case 2:
-			dataChangeMenu();
-			break;
-
-		case 3:
-			firstTypeArray->display();
-			secondTypeArray->display();
-			thirdTypeArray->display();
-			break;
-
-		case 4:
-			firstTypeArray->write();
-			secondTypeArray->write();
-			thirdTypeArray->write();
-			break;
-
-		case 5:
-			firstTypeArray->read();
-			secondTypeArray->read();
-			thirdTypeArray->read();
-			break;
-	}
-	return 1;
-}
 #endif
