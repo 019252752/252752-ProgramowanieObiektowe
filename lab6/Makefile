@@ -1,18 +1,26 @@
-CXX = g++
-CXXFLAGS = -std=c++11 -O1 -c
-RM = rm
-RMFLAGS = -rf
-MKDIR = mkdir
-
-all : build/main.out
-
-clean :
-	$(RM) $(RMFLAGS) build
-	$(MKDIR) build
-	$(RM) $(RMFLAGS) file.txt
-
-build/main.o : main.cpp
-	$(CXX) $(CXXFLAGS) $<  -o $@
-
-build/main.out : build/main.o
-	$(CXX) $^ -o $@
+output: main.o menu.o tablica_wysw.o tablica.o zapisywanie.o operations.o classCell.o
+		g++ main.o menu.o tablica_wysw.o tablica.o  zapisywanie.o operations.o classCell.o -o output
+		
+main.o: main.cpp
+	g++ -c main.cpp
+	
+menu.o: menu.cpp
+	g++ -c menu.cpp
+	
+tablica_wysw.o: tablica_wysw.cpp
+	g++ -c tablica_wysw.cpp
+	
+tablica.o: tablica.cpp
+	g++ -c tablica.cpp
+	
+zapisywanie.o: zapisywanie.cpp
+	g++ -c zapisywanie.cpp
+	
+operations.o: operations.cpp
+	g++ -c operations.cpp
+	
+classCell.o: classCell.cpp
+	g++ -c classCell.cpp
+	
+clean:
+	rm *.o output
