@@ -1,103 +1,148 @@
-#ifndef Table_h
-#define Table_h
-
+#ifndef main_hpp
+#define main_hpp
 #include <iostream>
 #include <fstream>
-#include "cell.h"
-
-#define FILE "file.txt"
-
+#include <string>
 using namespace std;
 
-template <class Type>
-class Array final {
-private:
-	Cell<Type> **array;
-	int rows = 0, columns = 0;
 
-public:
-	Array();
 
-	void changeSize(int, int = 0);
-	void changeData(int, int, Type);
-	void display(void);
-	void write(void);
-	void read(void);
+
+
+class Tablica
+{
+	
+	friend class Cell;
+	
+	private:
+	
+	/**
+	* @param line - ilosc wierszy tablicy
+	* @param column - ilosc kolumn tablicy
+	* @param old1, old2 - pomocnicze parametry zawierajace koljeno ilosc wierszy i kolumn
+	*/
+	
+		
+		
+		int line;
+		int column;
+		int old1, old2;
+		
+	public:
+	
+	/**
+	*@param string*types - tablica stringow
+	*@param Cell* cellArr - tablica obiektow klasy Cell
+	*/
+		string* types;
+	
+		Cell** cellArr;
+	
+	/**
+	* Ponizsze funkcje obsluguja tablice stringow types
+	*@param[out] string* types;
+	*/
+	void type_create();
+	
+	void type_choose();
+	
+	void removing_type();
+	
+	
+	/**
+	* Metody ponizej znajduja sie w pliku tablica.cpp
+	*/
+	
+	/**
+	*@param[out] line, column, old1, old2
+	*/
+	
+		void how();
+	
+	/**
+	*@param[out] tablica-str
+	*@param[in] line, column
+	*/
+	
+		void tablica_powstanie();
+		
+	
+		
+	/**
+	*@param[in] tablica-str
+	*@param[in] line, column
+	*/
+	
+		void removing_table();
+		
+	/**
+	*@param[in] old1, old2
+	*@param[in, out] tablica-str
+	*@param[in, out] line, column
+	*/
+	
+		int tablica_rozmiar();
+		
+	/**
+	*@param[in, out] tablica-str
+	*@param[in] line, column
+	*/
+	
+		void aktualizowanie();
+		
+	/**
+	* Metoda ponizej znajduje sie w pliku tablica_wysw.cpp
+	*@param[in] tablica-str
+	*@param[in] line, column
+	*/
+	
+		void wyswietlanie();
+		
+	/**
+	* Metody ponizej znajduja sie w zapisywanie.cpp
+	*@param[in, out] line, column
+	*/
+	
+		int size_open();
+		
+	/**
+	*@param[in, out] tablica-str
+	*@param[in] line, column
+	*/
+	
+		int file_open();
+		
+	/**
+	*@param[in] line, column
+	*/
+	
+		int size_close();
+		
+	/**
+	*@param[in] line, column
+	*@param[in] tablica-str
+	*/
+	
+		int file_close();
+	
+	/**
+	* Metody ponizej znajduja sie w operations.cpp
+	*@param[in] line, column
+	*@param[in] tablica-str
+	*/
+	
+		int addition_line ();
+		void addition_column ();
+		int minimum();
+		int maximum ();
+		int average ();
+		
+		
+		
+		
 };
 
-template <class Type>
-Array<Type>::Array(){
-	array = new Cell<Type>*();
-	array[0] = new Cell<Type>();
-}
 
-template <class Type>
-void Array<Type>::display(void){
-	for(int i = 0; i < rows; ++i){
-		for(int j = 0; j < columns; ++j){
-			cout << array[j][i] << " ";
-		}
-		cout << endl;
-	}
-}
 
-template <class Type>
-int Array<Type>::changeData(int xPos , int yPos, Type new_data){
-	if (yPos > rows || xPos > columns || xPos < 0 || yPos < 0){
-		return 1;
-	else array[xPos][yPos].setData(new_data);
-	return 0;
-}
 
-template <class Type>
-int Array<Type>::changeSize(int new_width, int new_height){
-	Cell<Type>** column_ptr = new Cell<Type>*[new_height];
-	Cell<Type>* row_ptr;
-
-	if(new_width < 0 || new_height < 0){
-		return 1;
-
-	else{
-		for(int column = 0; column < columns; ++column){
-			for (int row = 0; row < rows; ++row){
-				row_ptr = new Cell<Type>[new_width];
-				row_ptr[row] = array[column][row];
-			}
-			column_ptr[column] = row_ptr;
-
-			delete[] array[column];
-		}
-		delete[] array;
-
-		for (int column = columns; column < new_height; ++column){
-			row_ptr = new Cell<Type>[new_width];
-
-			column_ptr[column] = row_ptr;
-		}
-		columns = new_height;
-		rows = new_width;
-		array = column_ptr;
-	}
-	return 0;
-}
-
-template <class Type>
-void Array<Type>::write(void){
-	fstream outfile;
-	outfile.open(FILE, ios::out);
-
-	for(int i = 0; i < columns; ++i){
-		for(int j = 0; j < rows; ++j) outfile << array[i][j] << " ";
-		outfile << endl;
-	}
-	outfile.close();
-}
-
-template <class Type>
-void Array<Type>::read(void){
-	fstream infile;
-	infile.open(FILE, ios::in);
-
-	infile.close();
-}
 #endif
