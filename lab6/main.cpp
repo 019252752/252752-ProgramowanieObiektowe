@@ -1,6 +1,6 @@
-#include "classCell.hpp"
-#include "classTablica.hpp"
-#include "menu.hpp"
+#include "Cell_class.h"
+#include "Array_class.h"
+#include "menu.h"
 	
 int choice;
 
@@ -10,8 +10,7 @@ int op;
 
 Tablica arr;
 
-
-int main() {
+int main(){
 	
 	error=arr.size_open();
 	
@@ -25,117 +24,92 @@ int main() {
 	
 	interface(error);
 	
-if(error!=1)
-{
-
-	while(loop!=0){
-		choice=menu();
-		switch(choice) 
-		{
-
-			case 1:
+	if(error!=1){
+		while(loop!=0){
+			choice=menu();
+			switch(choice){
+				case 1:
 		
-				arr.removing_table();
+					arr.removing_table();
 				
-				arr.removing_type();
+					arr.removing_type();
 
-				arr.how();
+					arr.how();
 				
-				arr.type_create();
+					arr.type_create();
 				
-				arr.type_choose();
+					arr.type_choose();
 
-				arr.tablica_powstanie();
+					arr.tablica_powstanie();
+					break;
+				case 2:
+					
+					arr.how();
 
-			break;
+					error=arr.tablica_rozmiar();
+				
+					interface(error);
+				
+					if(error==2){
+						loop=0;
+					}
+					break;
+				case 3:
 			
-			case 2:
-					
-				arr.how();
+					arr.aktualizowanie();
+					break;
+				case 4:
 
-				error=arr.tablica_rozmiar();
-				
-				interface(error);
-				
-				if(error==2)
-				{
-					loop=0;
-				}
-				
-			case 3:
+					arr.wyswietlanie();
+					break;
+				case 5:
 			
-				arr.aktualizowanie();
-
-			break;
-			
-			case 4:
-
-				arr.wyswietlanie();
-
-			break;
-				
-			case 5:
-			
-			switch(menu_operations())
-				{
-					case 1:	
-					op=arr.addition_line();
-						operations_check(op);
-					break;
-					
-					case 2:
-						arr.addition_column ();
-					break;
-					
-					case 3:
-					op=arr.minimum ();
-						operations_check(op);
-					break;
-					
-					case 4:
-					op=arr.maximum ();
-						operations_check(op);
-					break;
-					
-					case 5:
-					op=arr.average ();
-						operations_check(op);
-					break;
-					
-					default:
+					switch(menu_operations()){
+						case 1:	
+							op=arr.addition_line();
+							operations_check(op);
+							break;
+						case 2:
+							arr.addition_column ();
+							break;
+						case 3:
+							op=arr.minimum ();
+							operations_check(op);
+							break;
+						case 4:
+							op=arr.maximum ();
+							operations_check(op);
+							break;
+						case 5:
+							op=arr.average ();
+							operations_check(op);
+							break;
+						default:
 						
+							break;
+					}
 					break;
-				}
+				case 6:
 				
-			
-			break;
-			
-			case 6:
-				
-				loop=0;
-			
-			break;
-				
-			default:
-			break;
-				
-				
-	
-		}					
+					loop=0;
+					break;
+				default:
+
+					break;
+			}					
+		}
 	}
-	////
-}
-		error=0;
+	error=0;
 		
-		error=arr.size_close();
+	error=arr.size_close();
 
-		interface(error);
+	interface(error);
 
-		error=arr.file_close();
+	error=arr.file_close();
 		
-		interface(error);
+	interface(error);
 
-		arr.removing_table();
+	arr.removing_table();
 
 	return 0;
 }

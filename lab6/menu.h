@@ -1,10 +1,9 @@
-#ifndef menu_hpp_
-#define menu_hpp_
+#ifndef menu_h
+#define menu_h
 #include <iostream>
 #include <fstream>
 
 using namespace std;
-
 
 int menu();
 
