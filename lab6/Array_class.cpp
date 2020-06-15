@@ -1,169 +1,298 @@
-#include "Cell_class.h"
-#include "Array_class.h"
-#include "menu.h"
+#include <iostream>
+#include "Tablica.h"
+#include "Komorka.h"
 
-void Tablica::tablica_powstanie(){
+int Tablica::zmien_rozmiar(Tablica *arr, int nowy_rozmiarX, int nowy_rozmiarY)
+{
+    if (nowy_rozmiarX <= 0 || nowy_rozmiarY <= 0)
+    {
+        return ERR_INVALID_SIZE;
+    }
 
-	Cell** tab = new Cell*[line];
-	for(int i=0; i < column; i++){
-		tab[i]=new Cell[column];
-	}
-	cellArr=tab;	
+    Tablica nowy_arr(nowy_rozmiarX);
+    nowy_arr.rozmiarY = nowy_rozmiarY;
+
+    kopiuj_zawartosc(*arr, nowy_arr);
+
+    delete[](*arr).tablica;
+
+    arr->tablica = nowy_arr.tablica;
+    arr->rozmiarX = nowy_arr.rozmiarX;
+    arr->rozmiarY = nowy_arr.rozmiarY;
+
+    return SUCCESS;
 }
 
-void Tablica::type_create(){
-	
-	string* tab_types = new string[column];
-	types=tab_types;
+int Tablica::kopiuj_zawartosc(Tablica tab1, Tablica tab2)
+{
+    for (int i = 0; i < tab1.rozmiarX; i++)
+    {
+        if (i >= tab2.rozmiarX)
+        {
+            break;
+        }
+
+        for (int j = 0; j < tab1.rozmiarY; j++)
+        {
+            if (j < tab2.rozmiarY)
+            {
+                tab2.tablica[i].ustawKomorke(j, *(tab1.tablica[i].pobierzKomorke(j)));
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    return SUCCESS;
 }
 
-void Tablica::type_choose(){
+int Tablica::aktualizuj_zawartoscINT(Tablica arr, int indeksX, int indeksY, int nowa_wartosc)
+{
+    if (arr.tablica[indeksX].pobierzKomorke(indeksY)->pobierzTyp() != INT)
+    {
+        return ERR_INVALID_SIZE;
+    }
 
-	int x=2;
-	for(int i=0; i<column; i++){
-		interface_type_choose();
-		while(x!=0 && x!=1){
-			cin >> x;
-		}
-		if(x==0){
-			types[i]="FLOAT";
-		}
-		else{
-			types[i]="STRING";
-		}
-	}
+    if (indeksX >= 0 && indeksX < arr.rozmiarX && indeksY >= 0 && indeksY < arr.rozmiarY)
+    {
+        arr.tablica[indeksX].pobierzKomorke(indeksY)->ustawWartoscInt(nowa_wartosc);
+        return SUCCESS;
+    }
+
+    return ERR_INVALID_SIZE;
 }
 
-void Tablica::removing_table(){
-		
-	for (int i = 0; i < line ; i++){
-		delete[] cellArr[i];
-	}
-	delete[] cellArr;
+int Tablica::aktualizuj_zawartoscSTR(Tablica arr, int indeksX, int indeksY, std::string nowa_wartosc)
+{
+    if (arr.tablica[indeksX].pobierzKomorke(indeksY)->pobierzTyp() != STRING)
+    {
+        return ERR_INVALID_SIZE;
+    }
+
+    if (indeksX >= 0 && indeksX < arr.rozmiarX && indeksY >= 0 && indeksY < arr.rozmiarY)
+    {
+        arr.tablica[indeksX].pobierzKomorke(indeksY)->ustawWartoscStr(nowa_wartosc);
+        return SUCCESS;
+    }
+
+    return ERR_INVALID_SIZE;
 }
 
-void Tablica::removing_type(){
-		
-	delete [] types;			
+int Tablica::suma_kolumna(Tablica arr, int kolumna, int *sumaY)
+{
+    if (kolumna >= 0 && kolumna < arr.rozmiarX)
+    {
+        if (arr.tablica[kolumna].pobierzTyp() != INT)
+            return ERR_INVALID_SIZE;
+
+        *sumaY = 0;
+
+        for (int i = 0; i < arr.rozmiarY; i++)
+        {
+            *sumaY += arr.tablica[kolumna].pobierzKomorke(i)->pobierzWartoscInt();
+        }
+    }
+    else
+        return ERR_INVALID_SIZE;
+
+    return SUCCESS;
 }
 
-int Tablica::tablica_rozmiar(){
+int Tablica::suma_wiersz(Tablica arr, int wiersz, int *sumaX)
+{
+    if (wiersz >= 0 && wiersz < arr.rozmiarY)
+    {
+        *sumaX = 0;
 
-	if (line>=old1 || column>=old2){
-		Cell** tab_copy = new Cell* [line];
+        for (int j = 0; j < arr.rozmiarX; j++)
+        {
+            if (arr.tablica[j].pobierzKomorke(wiersz)->pobierzTyp() != INT)
+            {
+                continue;
+            }
 
-		for (int i = 0; i < column; i++){
-			tab_copy[i] = new Cell[column];
-		}
-		for (int i = 0; i < old1; i++){
-			for (int j = 0; j < old2; j++){
-					
-				if(types[j]=="FLOAT"){
-					tab_copy[i][j].floatFunction (cellArr[i][j].floatOut());
-				}
-				else{	
-					tab_copy[i][j].stringFunction (cellArr[i][j].stringOut());		
-				}
-			}
-		}			
-		for(int i=0; i < old1; i++){
-			delete[] cellArr[i];
-		}
-		delete[] cellArr;
-
-		cellArr = tab_copy;
-			
-		for(int i=0; i < line; i++){
-			delete[] tab_copy[i];
-		}	
-		delete[] tab_copy;
-	}
-	else{
-		return 2;	
-	}
-	return 0;
+            *sumaX += arr.tablica[j].pobierzKomorke(wiersz)->pobierzWartoscInt();
+        }
+    }
+    else
+        return ERR_INVALID_SIZE;
+    return SUCCESS;
 }
 
-void Tablica::aktualizowanie(){
+int Tablica::minimumY(Tablica arr, int wiersz, int *najmniejszaX)
+{
+    if (wiersz >= 0 && wiersz < arr.rozmiarY)
+    {
+        *najmniejszaX = 0;
 
-	int wiersz, kolumna;
-	int koniec = 0;
-	float data1;
-	string data2;
-		
-	interface_aktualizowanie(1);
-	cout << line << "x" << column << endl;
+        for (int i = 0; i < arr.rozmiarX; i++)
+        {
+            if (arr.tablica[i].pobierzKomorke(wiersz)->pobierzTyp() != INT)
+            {
+                continue;
+            }
 
-	while (koniec == 0){
+            *najmniejszaX = arr.tablica[i].pobierzKomorke(wiersz)->pobierzWartoscInt();
 
-		interface_aktualizowanie(2);
-
-		cin >> wiersz;
-		while (wiersz  < 0 || wiersz > line){
-			interface_aktualizowanie(3);
-			cin >> wiersz;
-		}
-		interface_aktualizowanie(4);
-
-		cin >> kolumna;
-		while (kolumna < 0 || kolumna > column){
-			interface_aktualizowanie(3);
-			cin >> kolumna;
-		}
-		interface_aktualizowanie(5);
-			
-		if(types[kolumna]=="FLOAT"){
-			cout << cellArr[wiersz][kolumna].floatOut() << endl;
-			
-			interface_aktualizowanie(6);
-			cin >> data1;
-			
-			cellArr[wiersz][kolumna].floatFunction(data1);
-		}
-		else{
-			cout << cellArr[wiersz][kolumna].stringOut() << endl;
-			
-			interface_aktualizowanie(6);
-			cin >> data2;
-			
-			cellArr[wiersz][kolumna].stringFunction(data2);
-		}
-		interface_aktualizowanie(7);
-
-		cin >> koniec; 
-
-		if (koniec == 1){
-			koniec = 1;
-		}
-		else{
-			koniec = 0;
-		}
-	}
+            if (arr.tablica[i].pobierzKomorke(wiersz)->pobierzWartoscInt() < *najmniejszaX)
+            {
+                *najmniejszaX = arr.tablica[i].pobierzKomorke(wiersz)->pobierzWartoscInt();
+            }
+        }
+    }
+    else
+        return ERR_INVALID_SIZE;
+    return SUCCESS;
 }
 
-void Tablica::how(){
+int Tablica::minimumX(Tablica arr, int kolumna, int *najmniejszaY)
+{
+    if (kolumna >= 0 && kolumna < arr.rozmiarX)
+    {
+        if (arr.tablica[kolumna].pobierzTyp() != INT)
+            return ERR_INVALID_SIZE;
 
-	int z=0;
-	int w=0;
-	old1=line;
-	old2=column;
-		
-	while(z<1){
-		interface_how(1);
-		cin >> z;
+        *najmniejszaY = 0;
 
-		if(z<1){
-			interface_how(3);
-		}
-	}
-	while(w<1){					
-		interface_how(2);
-		cin >> w;
-				
-		if(w<1){
-			interface_how(3);
-		}
-	}
-	line=z;
-	column=w;
+        for (int j = 0; j < arr.rozmiarY; j++)
+        {
+
+            *najmniejszaY = arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
+
+            if (arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt() < *najmniejszaY)
+            {
+
+                *najmniejszaY = arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
+            }
+        }
+    }
+    else
+        return ERR_INVALID_SIZE;
+    return SUCCESS;
+}
+
+int Tablica::maximumX(Tablica arr, int kolumna, int *najwiekszaX)
+{
+    if (kolumna >= 0 && kolumna < arr.rozmiarX)
+    {
+        if (arr.tablica[kolumna].pobierzTyp() != INT)
+            return ERR_INVALID_SIZE;
+
+        *najwiekszaX = 0;
+
+        for (int j = 0; j < arr.rozmiarY; j++)
+        {
+
+            *najwiekszaX = arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
+
+            if (arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt() > *najwiekszaX)
+            {
+                *najwiekszaX = arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
+            }
+        }
+    }
+    else
+        return ERR_INVALID_SIZE;
+    return SUCCESS;
+}
+
+int Tablica::maximumY(Tablica arr, int wiersz, int *najwiekszaY)
+{
+    if (wiersz >= 0 && wiersz < arr.rozmiarY)
+    {
+        *najwiekszaY = 0;
+
+        for (int i = 0; i < arr.rozmiarX; i++)
+        {
+            if (arr.tablica[i].pobierzKomorke(wiersz)->pobierzTyp() != INT)
+            {
+                continue;
+            }
+
+            *najwiekszaY = arr.tablica[i].pobierzKomorke(wiersz)->pobierzWartoscInt();
+
+            if (arr.tablica[i].pobierzKomorke(wiersz)->pobierzWartoscInt() > *najwiekszaY)
+            {
+                *najwiekszaY = arr.tablica[i].pobierzKomorke(wiersz)->pobierzWartoscInt();
+            }
+        }
+    }
+    else
+        return ERR_INVALID_SIZE;
+    return SUCCESS;
+}
+
+int Tablica::srednia_wiersz(Tablica arr, int wiersz, double *sredniaX, int *sumaX)
+{
+    if (wiersz >= 0 && wiersz < arr.rozmiarY)
+    {
+        *sredniaX = 0;
+        *sumaX = 0;
+        
+        for (int i = 0; i < arr.rozmiarX; i++)
+        {
+            if (arr.tablica[i].pobierzKomorke(wiersz)->pobierzTyp() != INT)
+            {
+                continue;
+            }
+
+            *sumaX += arr.tablica[i].pobierzKomorke(wiersz)->pobierzWartoscInt();
+        }
+        *sredniaX = ((double)*sumaX / arr.rozmiarX);
+    }
+
+    else
+        return ERR_INVALID_SIZE;
+    return SUCCESS;
+}
+
+int Tablica::srednia_kolumna(Tablica arr, int kolumna, double *sredniaY, int *sumaY)
+{
+    if (kolumna >= 0 && kolumna < arr.rozmiarX)
+    {
+        if (arr.tablica[kolumna].pobierzTyp() != INT)
+            return ERR_INVALID_SIZE;
+
+        *sredniaY = 0;
+        *sumaY = 0;
+        for (int j = 0; j < arr.rozmiarY; j++)
+        {
+            *sumaY += arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
+        }
+
+        *sredniaY = ((double)*sumaY / arr.rozmiarY);
+    }
+
+    else
+        return ERR_INVALID_SIZE;
+    return SUCCESS;
+}
+
+int Tablica::zmienTyp(int typ, int zmienianaKolumna)
+{
+    if (zmienianaKolumna >= 0 && zmienianaKolumna < rozmiarX)
+    {
+        if (typ == INT && tablica[zmienianaKolumna].pobierzTyp() != INT)
+        {
+            KolumnaInt *nowaKolumna = new KolumnaInt();
+            tablica[zmienianaKolumna] = *nowaKolumna;
+        }
+        else if (typ == STRING && tablica[zmienianaKolumna].pobierzTyp() != STRING)
+        {
+            KolumnaStr *nowaKolumna = new KolumnaStr();
+            tablica[zmienianaKolumna] = *nowaKolumna;
+        }
+        else
+        {
+            return ERR_INVALID_SIZE;
+        }
+    }
+    else
+    {
+        return ERR_INVALID_SIZE;
+    }
+
+    return SUCCESS;
 }
