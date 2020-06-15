@@ -1,193 +1,293 @@
-#include "Cell_class.h"
-#include "Array_class.h"
-#include "menu.h"
+#include <iostream>
+#include "Tablica.h"
 
-int menu(){
+using namespace std;
 
-	int m=0;	
-	cout << endl <<"MENU:" << endl;
-	cout << "1. Stworz nowa tabele (usun poprzednia)." << endl;
-	cout << "2. Zmien rozmiar." << endl;
-	cout << "3. Aktualizuj elementy tabeli." << endl;
-	cout << "4. Wyswietl tabele." << endl;
-	cout << "5. Operacje matematyczne" << endl;
-	cout << "6. Zakoncz program" << endl;
-	cin >> m;
-					
-	return m;
-}
+int menu()
+{
 
-int typeMenu(){
-	int t=0;
-		
-	cout << "Stworz/wczytaj arkusz z:"<< endl;
-	cout << "1. Liczbami." << endl << "2. Slowami." << endl;
-		
-	while(t!=1 && t!=2){
-		cout << "Wybierz 1 lub 2." << endl;
-		cin >> t;
-	}
-		
-	return t;
-}
-	
-void interface_type_choose(){
-		
-	cout << endl <<"Dla kolumny liczbowej wybierz 0, a dla tekstowej wybierz 1." << endl;		
-}
+    Tablica arr;
 
-int menu_operations(){
-	
-	int m;
-	cout << "1. Zsumuj elementy w wybranym wierszu." << endl; 
-	cout << "2. Zsumuj elementy w wybranej kolumnie."<< endl;
-	cout << "3. Znajdz najmniejszy element" << endl;
-	cout << "4. Znajdz najwiekszy element" << endl ;
-	cout << "5. Policz srednia" << endl;
-	cout << "6. Wroc do menu" << endl;
-	cin >> m;
-	
-	return m;
-}
+    while (true)
+    {
 
-void interface(int x){
-			
-	switch(x){
-		case 1: 
-			cout << "FILES ERROR" << endl;
-			break;
-		case 2:
-			cout << endl << "Nowe wymiary musza byc wieksze od starych." << endl << "FATAL ERROR" << endl;
-			break;
-		default:
-			break;
-	}
-}
+        int wybor;
+        cout << endl;
+        cout << "Wybierz opcje:"
+                "\n";
+        cout << "1) Wyswietl tablice"
+                "\n";
+        cout << "2) Zmien wartosc komorki"
+                "\n";
+        cout << "3) Zmien rozmiar tablicy"
+                "\n";
+        cout << "4) Suma wg kolumn"
+                "\n";
+        cout << "5) Suma wg wierszy"
+                "\n";
+        cout << "6) Najmniejsza wartosc w wierszach"
+                "\n";
+        cout << "7) Najmniejsza wartosc w kolumnach"
+                "\n";
+        cout << "8) Najwieksza wartosc w wierszach"
+                "\n";
+        cout << "9) Najwieksza wartosc w kolumnach"
+                "\n";
+        cout << "10) Srednia wartosc w wierszach"
+                "\n";
+        cout << "11) Srednia wartosc w kolumnach"
+                "\n";
+        cout << "12) Zmien typ kolumny"
+                "\n";
+        cin >> wybor;
+        cout << endl;
 
-void interface_aktualizowanie(int x){
-	
-	switch(x){
-		case 1:
-			cout << "Rozmiar tablicy:" << endl;
-			break;
-		case 2:
-			cout << "Wybierz element do zmiany." << endl;
-			cout << "Podaj numer wiersza:" << endl;
-			break;
-		case 3:
-			cout << "Nieprawidlowy element, sprobuj jeszcze raz:" << endl;
-			break;
-		case 4:
-			cout << "Podaj numer kolumny:" << endl;
-			break;
-		case 5:
-			cout << "Zawartosc komorki:" << endl;
-			break;
-		case 6:
-			cout << "Nowa wartosc:" << endl;
-			break;
-		case 7:
-			cout << endl << "Wybierz 1, by zakonczyc zmiany lub inny przycisk, by kontynuowac." << endl;
-			break;
-	}
-}
+        switch (wybor)
+        {
+        case 1:
+        {
+            if (arr.wyswietl_tablice(arr) != SUCCESS)
+            {
+                cout << "Blad! - wyswietlanie nie dziala." << endl;
+            }
 
-void interface_how(int x){
+            break;
+        }
+        case 2:
+        {
+            int indeksX;
+            int indeksY;
 
-	switch(x){
-		case 1:
-			cout << "Podaj ilosc wierszy:" << endl;
-			break;
-		case 2:
-			cout << "Podaj ilosc kolumn: " << endl;
-			break;
-		case 3:
-			cout << endl << "Wprowadzono bledno wartosc, wpisz poprawna jeszcze raz." <<  endl;
-			break;
-	}
-}
+            int nowa_wartosc;
 
-void interface_wysw(int x){
+            cout << "Wybierz numer kolumny w ktorej chcesz edytowac element: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
 
-	switch(x){
-		case 1:
-			cout << endl << "Kolumna:" << endl;
-			break;
-		case 2:
-			cout << "Podaj wspolrzedne:" << endl << "Wiersz:";
-			break;
-		case 3:
-			cout << endl << "Nieprawidlowa wspolrzedna, sprobuj ponownie:";
-			break;
-	}
-}
+            cin >> indeksX;
 
-void interface_add(int x){
+            cout << "Wybierz numer wiersza w ktorym chcesz edytowac element: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
 
-	switch(x){
-		case 1:
-			cout << endl << "Wierz do zsumowania.";
-			cout << endl << "Nr wiersza:";
-			break;
-		case 2:
-			cout <<endl << "Blad, sprobuj ponownie:";
-			break;
-		case 3:
-			cout << endl << "Suma:";
-			break;
-		case 4:
-			cout << endl << "Ktora kolumne chcesz zsumowac?";
-			out << endl << "Nr kolumny: ";
-			break;
-	}
-}
+            cin >> indeksY;
 
-void interface_min(int x){
+            if (arr.pobierzTypKomorki(indeksX, indeksY) == INT)
+            {
 
-	switch(x){
-		case 1:
-			cout << "Dla minimum w wierzu wybierz 1." << endl <<"Dla minimum w kolumnie wybierz 2" << endl;
-			break;
-		case 2:
-			cout << "Najmniejszy elelement:" << endl;
-			break;
-		case 3:
-			cout << endl << "Wpisz numer:" << endl;
-			break;
-	}
-}
+                int nowa_wartosc;
+                cout << "Zmien na (int): ";
 
-void interface_max(int x){
+                cin >> nowa_wartosc;
 
-	switch(x){
-		case 1:
-			cout << "Dla maximum w wierszu wybierz 1." << endl <<"Dla maximum w kolumnie wybierz 2." << endl;
-			break;
-		case 2:
-			cout << "Najwiekszy elelement to:" << endl;
-			break;
-	}
-}
+                if (arr.aktualizuj_zawartoscINT(arr, indeksX, indeksY, nowa_wartosc) != SUCCESS)
+                {
+                    cout << "Wystapil blad! - zmieniles wartosc komorki ktorej nie ma." << endl;
+                }
+            }
+            else if (arr.pobierzTypKomorki(indeksX, indeksY) == STRING)
+            {
+                std::string nowa_wartosc;
+                cout << "Zmien na (string): ";
 
-void interface_av(int x){
+                cin >> nowa_wartosc;
 
-	switch(x){
-		case 1:
-			cout << "Dla sredniej w wierszu wybierz 1. Dla sredniej w kolumnie wybierz 2." << endl;
-			break;
-		case 2:
-			cout << "Srednia wszystkich elementow:" << endl;
-			break;
-		case 3:
-			cout << endl << "Wpisz numer:" << endl;
-			break;
-	}
-	
-}
+                if (arr.aktualizuj_zawartoscSTR(arr, indeksX, indeksY, nowa_wartosc) != SUCCESS)
+                {
+                    cout << "Wystapil blad! - zmieniles wartosc komorki ktorej nie ma." << endl;
+                }
+            }
 
-void operations_check(int x){
-	
-	if(x==0){
-		cout << endl << "Wystapil blad podczas dzialania." << endl;
-	}
+            break;
+        }
+        case 3:
+        {
+            int nowy_rozmiarX;
+            int nowy_rozmiarY;
+
+            cout << "Podaj nowy rozmiarX (>0): ";
+            cin >> nowy_rozmiarX;
+
+            cout << "Podaj nowy rozmiarY(>0): ";
+            cin >> nowy_rozmiarY;
+
+            if (arr.zmien_rozmiar(&arr, nowy_rozmiarX, nowy_rozmiarY) != SUCCESS)
+            {
+                cout << "Wysapil blad!" << endl;
+            }
+            break;
+        }
+        case 4:
+        {
+
+            int sumaY, kolumna;
+
+            cout << "Wybierz kolumne ktora chcesz zsumowac: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
+
+            cin >> kolumna;
+
+            if (arr.suma_kolumna(arr, kolumna, &sumaY) == SUCCESS)
+            {
+                cout << "Suma " << kolumna << "-tej kolumny to " << sumaY << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+        case 5:
+        {
+
+            int sumaX, wiersz;
+
+            cout << "Wybierz wiersz ktory chcesz zsumowac: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
+
+            cin >> wiersz;
+
+            if (arr.suma_wiersz(arr, wiersz, &sumaX) == SUCCESS)
+            {
+                cout << "Suma " << wiersz << "-tego wiersza to " << sumaX << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+        case 6:
+        {
+
+            int najmniejszaY, wiersz;
+
+            cout << "Wybierz wiersz w ktorym ma wyswietlic sie najmniejsza wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
+
+            cin >> wiersz;
+
+            if (arr.minimumY(arr, wiersz, &najmniejszaY) == SUCCESS)
+            {
+                cout << "Najmniejsza wartosc  " << wiersz << "-tego wiersza to " << najmniejszaY << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+        case 7:
+        {
+
+            int najmniejszaX, kolumna;
+
+            cout << "Wybierz kolumne w ktorej ma wyswietlic sie najmniejsza wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
+
+            cin >> kolumna;
+
+            if (arr.minimumX(arr, kolumna, &najmniejszaX) == SUCCESS)
+            {
+                cout << "Najmniejsza wartosc  " << kolumna << "-tej kolumny to " << najmniejszaX << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+        case 8:
+        {
+
+            int najwiekszaY, wiersz;
+
+            cout << "Wybierz wiersz w ktorym ma wyswietlic sie najwieksza wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
+
+            cin >> wiersz;
+
+            if (arr.maximumY(arr, wiersz, &najwiekszaY) == SUCCESS)
+            {
+                cout << "Najwieksza wartosc  " << wiersz << "-tego wiersza to " << najwiekszaY << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+        case 9:
+        {
+
+            int najwiekszaX, kolumna;
+
+            cout << "Wybierz kolumne w ktorej ma wyswietlic sie najwieksza wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
+
+            cin >> kolumna;
+
+            if (arr.maximumX(arr, kolumna, &najwiekszaX) == SUCCESS)
+            {
+                cout << "Najwieksza wartosc  " << kolumna << "-tej kolumny to " << najwiekszaX << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+        case 10:
+        {
+
+            double sredniaX;
+            int wiersz, sumaX;
+
+            cout << "Wybierz wiersz w ktorym ma wyswietlic sie srednia wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
+
+            cin >> wiersz;
+
+            if (arr.srednia_wiersz(arr, wiersz, &sredniaX, &sumaX) == SUCCESS)
+            {
+                cout << "Srednia wartosc  " << wiersz << "-tego wiersza to " << sredniaX << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+        case 11:
+        {
+
+            double sredniaY;
+            int kolumna, sumaY;
+
+            cout << "Wybierz kolumne w ktorej ma wyswietlic sie srednia wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
+
+            cin >> kolumna;
+
+            if (arr.srednia_kolumna(arr, kolumna, &sredniaY, &sumaY) == SUCCESS)
+            {
+                cout << "Srednia wartosc  " << kolumna << "-tej kolumny to " << sredniaY << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+            break;
+        }
+
+        case 12:
+        {
+            int typ;
+            int zmienianaKolumna;
+            cout << "Wybierz typ: (0 -> STRING / 1 -> INT)";
+            cin >> typ;
+            cout << "Wybierz kolumne ktorej typ chcesz zmienić: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
+            cin >> zmienianaKolumna;
+
+            if (arr.zmienTyp(typ, zmienianaKolumna) == SUCCESS)
+            {
+                cout << "Zmieniono typ!" << endl;
+            }
+            else
+            {
+                cout << "Wystapil blad!" << endl;
+            }
+
+            break;
+        }
+        }
+    }
 }
