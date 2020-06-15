@@ -1,25 +1,54 @@
-#ifndef cell_h
-#define cell_h
-#include <iostream>
-#include <fstream>
+#pragma once
 #include <string>
 
-using namespace std;
+#define STRING 0
+#define INT 1
 
-class Cell{
-	friend class Tablica;
-	
-	private:
-		float floatvalue;
-		string stringvalue;
-		int which;
-	public:
-		void floatFunction (float val);
-		
-		void stringFunction (string val);
-		
-		float floatOut();
-		
-		string stringOut();		
+class Komorka
+{
+private:
+    int danaInt = 0;
+    std::string danaStr = " ";
+    int typ;
+
+public:
+    Komorka()
+    {
+        ustawTyp(INT);
+    }
+
+    Komorka(int typ)
+    {
+        ustawTyp(typ);
+    }
+
+    void ustawTyp(int nowyTyp)
+    {
+        typ = nowyTyp;
+    }
+
+    int pobierzTyp()
+    {
+        return typ;
+    }
+
+    int pobierzWartoscInt()
+    {
+        return danaInt;
+    }
+
+    void ustawWartoscInt(int nowaWartoscInt)
+    {
+        danaInt = nowaWartoscInt;
+    }
+
+    std::string pobierzWartoscStr()
+    {
+        return danaStr;
+    }
+
+    void ustawWartoscStr(std::string nowaWartoscStr)
+    {
+        danaStr = nowaWartoscStr;
+    }
 };
-#endif
