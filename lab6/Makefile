@@ -10,6 +10,5 @@ tablica_wysw.o: tablica_wysw.cpp
 	g++ -c tablica_wysw.cpp
 menu.o: menu.cpp
 	g++ -c menu.cpp
-
 clean:
 	rm -f *.o program
