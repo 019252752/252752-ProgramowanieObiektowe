@@ -1,26 +1,15 @@
-output: main.o menu.o tablica_wysw.o tablica.o zapisywanie.o operations.o classCell.o
-		g++ main.o menu.o tablica_wysw.o tablica.o  zapisywanie.o operations.o classCell.o -o output
-		
-main.o: main.cpp
+all: program
+
+program: main.o menu.o tablica.o tablica_wysw.o 
+	g++ main.o menu.o tablica.o tablica_wysw.o -o program
+main.o: menu.cpp
 	g++ -c main.cpp
-	
-menu.o: menu.cpp
-	g++ -c menu.cpp
-	
-tablica_wysw.o: tablica_wysw.cpp
-	g++ -c tablica_wysw.cpp
-	
 tablica.o: tablica.cpp
 	g++ -c tablica.cpp
-	
-zapisywanie.o: zapisywanie.cpp
-	g++ -c zapisywanie.cpp
-	
-operations.o: operations.cpp
-	g++ -c operations.cpp
-	
-classCell.o: classCell.cpp
-	g++ -c classCell.cpp
-	
+tablica_wysw.o: tablica_wysw.cpp
+	g++ -c tablica_wysw.cpp
+menu.o: menu.cpp
+	g++ -c menu.cpp
+
 clean:
-	rm *.o output
+	rm -f *.o program
