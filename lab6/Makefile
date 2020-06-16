@@ -1,13 +1,13 @@
 all: program
 
-program: main.o menu.o tablica.o tablica_wysw.o 
-	g++ main.o menu.o tablica.o tablica_wysw.o -o program
+program: main.o menu.o Array_class.o Table_view.o 
+	g++ main.o menu.o Array_class.o Table_view.o -o program
 main.o: menu.cpp
 	g++ -c main.cpp
-tablica.o: tablica.cpp
-	g++ -c tablica.cpp
-tablica_wysw.o: tablica_wysw.cpp
-	g++ -c tablica_wysw.cpp
+Array_class.o: Array_class.cpp
+	g++ -c Array_class.cpp
+Table_view.o: Table_view.cpp
+	g++ -c Table_view.cpp
 menu.o: menu.cpp
 	g++ -c menu.cpp
 clean:
