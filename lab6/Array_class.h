@@ -1,65 +1,46 @@
-#pragma once
-#include "Column.h"
-#include "Column_Int.h"
-#include "Column_Str.h"
+#ifndef tablica_hpp
+#define tablica_hpp
 
-#define MAX_Y 100
-#define SUCCESS 0
-#define ERR_INVALID_SIZE 1
+#include <iostream>
+#include "komorka.hpp"
+using namespace std;
 
-class Tablica{
-	private:
-		Kolumna *tablica;
-		int rozmiarX;
-		int rozmiarY;
-
-	public:
-		Tablica(){
-			rozmiarX = 10;
-			rozmiarY = 10;
-
-			tablica = new KolumnaInt[rozmiarX];
-		}
-		Tablica(int nrozmiarX){
-			rozmiarX = nrozmiarX;
-			rozmiarY = 10;
-
-			tablica = new KolumnaInt[rozmiarX];
-		}
-		int pobierzRozmiarX(){
-			return rozmiarX;
-		}
-		int pobierzRozmiarY(){
-			return rozmiarY;
-		}
-		int pobierzTypKomorki(int x, int y){
-			return tablica[x].pobierzKomorke(y)->pobierzTyp();
-		}
-		int kopiuj_zawartosc(Tablica tab1, Tablica tab2);
-
-		int zmien_rozmiar(Tablica *arr, int nowy_rozmiarX, int nowy_rozmiarY);
-
-		int wyswietl_tablice(Tablica arr);
-
-		int zmienTyp(int typ, int zmienianyKolumna);
-
-		int aktualizuj_zawartoscINT(Tablica arr, int indeksX, int indeksY, int nowa_wartosc);
-
-		int aktualizuj_zawartoscSTR(Tablica arr, int indeksX, int indeksY, std::string nowa_wartosc);
-
-		int suma_kolumna(Tablica arr, int kolumna, int *sumaY);
-
-		int suma_wiersz(Tablica arr, int wiersz, int *sumaX);
-
-		int minimumX(Tablica arr, int wiersz, int *najmniejszaX);
-
-		int minimumY(Tablica arr, int kolumna, int *najmniejszaY);
-
-		int maximumX(Tablica arr, int wiersz, int *najwiekszaX);
-
-		int maximumY(Tablica arr, int kolumna, int *najwiekszaY);
-
-		int srednia_wiersz(Tablica arr, int wiersz, double *sredniaX, int *sumaX);
-
-		int srednia_kolumna(Tablica arr, int kolumna, double *sredniaY, int *sumaY);
+class Tablica
+{
+public:
+    size_t zwroc_x() const;
+    size_t zwroc_y() const;
+    typy* zwroc_typy(typy* w = nullptr) const;
+    Komorka** zwroc_kolumne(size_t k) const;
+    Komorka** zwroc_wiersz(size_t w) const;
+    Komorka& zwroc_komorke(size_t indeks_x, size_t indeks_y);
+    
+    //konstruktory i destruktor
+    Tablica();
+    Tablica(size_t nowy_x, size_t nowy_y, typy* nowe_typy);
+    Tablica(const Tablica& t);
+    Tablica(Tablica&& t);
+    Tablica& operator=(const Tablica& t);
+    Tablica& operator=(Tablica&& t);
+    ~Tablica();
+    
+    void wypisz(ostream& out, bool naglowek = false) const;
+    void wczytaj(istream& in);
+    void zmien_rozmiar(size_t nowy_x, size_t nowy_y, typy* nowe_typy);
+    
+    static double policz_min(Komorka** t, size_t n);
+    static double policz_max(Komorka** t, size_t n);
+    static double policz_sum(Komorka** t, size_t n);
+    static double policz_avg(Komorka** t, size_t n);
+private:
+    void usun_stara();
+    void skopiuj_nowa(const Tablica& t);
+    void przenies_nowa(Tablica& t);
+    
+    Komorka*** tab;
+    typy* typy_tablicy;
+    size_t x;
+    size_t y;
 };
+
+#endif /* tablica_hpp */
