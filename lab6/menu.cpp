@@ -1,194 +1,242 @@
-#include <iostream>
-#include "Array_class.h"
+#include "menu.hpp"
 
-using namespace std;
+void pisz_bledy(ostream& out, bledy b)
+{
+    if (b & NIE_MA_WARTOSCI_STATYSTYCZNEJ)
+        out << "Próba uzyskania wartości natrafiła na komórkę dla której nie można uzyskać wartości statystycznej" << endl;
+    if (b & ZLY_STAN_STRUMIENIA)
+        out << "Operacja na strumieniu zakończyła się jego niepoprawnym stanem" << endl;
+    if (b & INDEKS_POZA_TABLICA)
+        out << "Indeks operacji leży poza tablicą" << endl;
+    if (b & TABLICA_JEST_PUSTA)
+        out << "Tablica jest pusta" << endl;
+    if (b & BLAD_ODCZYTU_PLIKU)
+        out << "Otwarcie pliku do odczytu nie powiodło się" << endl;
+    if (b & BLAD_ZAPISU_PLIKU)
+        out << "Otwarcie pliku do zapisu nie powiodło się" << endl;
+    if (b & NIEZNANE_POLECENIE)
+        out << "Nieznane polecenie" << endl;
+}
 
-int menu(){
+void nowa_tablica(Tablica& t)
+{
+    size_t nowy_x;
+    size_t nowy_y;
+    typy* nowe_typy;
+    unsigned int temp;
+    cout << "Podaj nową szerokość:" << endl;
+    cin >> nowy_x;
+    cout << "Podaj nową wysokość:" << endl;
+    cin >> nowy_y;
+    nowe_typy = new typy[nowy_x];
+    if (nowy_x > 0)
+    {
+        cout << "1. integer" << endl;
+        cout << "2. double" << endl;
+        cout << "3. string" << endl;
+        for (size_t i = 0; i < nowy_x; ++i)
+        {
+            cout << "Podaj typ dla kolumny " << i << ":" << endl;
+            cin >> temp;
+            if (temp < 1 || temp > 3)
+            {
+                delete [] nowe_typy;
+                throw bledy(NIEZNANE_POLECENIE);
+            }
+            nowe_typy[i] = typy(temp);
+        }
+    }
+    t = Tablica(nowy_x, nowy_y, nowe_typy);
+}
+void zmien_rozmiar(Tablica& t)
+{
+    size_t nowy_x;
+    size_t nowy_y;
+    unsigned int temp;
+    typy* nowe_typy;
+    cout << "Podaj nową szerokość:" << endl;
+    cin >> nowy_x;
+    cout << "Podaj nową wysokość:" << endl;
+    cin >> nowy_y;
+    nowe_typy = t.zwroc_typy(new typy[max(nowy_x, t.zwroc_x())]);
+    if (nowy_x > t.zwroc_x())
+    {
+        cout << "1. integer" << endl;
+        cout << "2. double" << endl;
+        cout << "3. string" << endl;
+        for (size_t i = t.zwroc_x(); i < nowy_x; ++i)
+        {
+            cout << "Podaj typ dla kolumny " << i << ":" << endl;
+            cin >> temp;
+            if (temp < 1 || temp > 3)
+            {
+                delete [] nowe_typy;
+                throw bledy(NIEZNANE_POLECENIE);
+            }
+            nowe_typy[i] = typy(temp);
+        }
+    }
+    t.zmien_rozmiar(nowy_x, nowy_y, nowe_typy);
+    delete [] nowe_typy;
+}
+void wyswietl(Tablica& t)
+{
+    t.wypisz(cout);
+}
+void zmien_wartosc(Tablica& t)
+{
+    size_t x;
+    size_t y;
+    cout << "Podaj kolumnę:" << endl;
+    cin >> x;
+    cout << "Podaj wiersz:" << endl;
+    cin >> y;
+    cout << "Podaj nową wartość:" << endl;
+    cin >> t.zwroc_komorke(x, y);
+}
+void wczytaj(Tablica& t)
+{
+    string nazwa_pliku;
+    cout << "Podaj nazwę pliku:" << endl;
+    cin >> nazwa_pliku;
+    ifstream plik(nazwa_pliku);
+    if (!plik.good())
+        throw bledy(BLAD_ODCZYTU_PLIKU);
+    t.wczytaj(plik);
+    plik.close();
+}
+void zapisz(Tablica& t)
+{
+    string nazwa_pliku;
+    cout << "Podaj nazwę pliku:" << endl;
+    cin >> nazwa_pliku;
+    ofstream plik(nazwa_pliku);
+    if (!plik.good())
+        throw bledy(BLAD_ZAPISU_PLIKU);
+    t.wypisz(plik, true);
+    plik.close();
+}
+void szukaj(Tablica& t)
+{
+    unsigned int tryb;
+    unsigned int indeks;
+    size_t n;
+    double wynik;
+    Komorka** temp = nullptr;
+    cout << "1. Suma według kolumny" << endl;
+    cout << "2. Suma według wiersza" << endl;
+    cout << "3. Średnia według kolumny" << endl;
+    cout << "4. Średnia według wiersza" << endl;
+    cout << "5. Min według kolumny" << endl;
+    cout << "6. Min według wiersza" << endl;
+    cout << "7. Max według kolumny" << endl;
+    cout << "8. Max według wiersza" << endl;
+    cout << "Wybierz kryterium:" << endl;
+    cin >> tryb;
+    if (tryb < 1 || tryb > 8)
+        throw bledy(NIEZNANE_POLECENIE);
+    cout << "Podaj indeks operacji:" << endl;
+    cin >> indeks;
+    try
+    {
+        if (tryb % 2 == 1)
+        {
+            temp = t.zwroc_kolumne(indeks);
+            n = t.zwroc_y();
+        }
+        else
+        {
+            temp = t.zwroc_wiersz(indeks);
+            n = t.zwroc_x();
+        }
+        switch(tryb)
+        {
+            case 1: case 2:
+                wynik = Tablica::policz_sum(temp, n);
+                cout << "Suma wynosi: " << wynik << endl;
+                break;
+            case 3: case 4:
+                wynik = Tablica::policz_avg(temp, n);
+                cout << "Średnia wynosi: " << wynik << endl;
+                break;
+            case 5: case 6:
+                wynik = Tablica::policz_min(temp, n);
+                cout << "Min wynosi: " << wynik << endl;
+                break;
+            case 7: case 8:
+                wynik = Tablica::policz_max(temp, n);
+                cout << "Max wynosi " << wynik << endl;
+                break;
+            default:
+                throw bledy(NIEZNANE_POLECENIE);
+        }
+        delete [] temp;
+    }
+    catch (bledy b)
+    {
+        delete [] temp;
+        throw b;
+    }
+}
 
-	Tablica arr;
-	int sumaY, kolumna, sumaX, wiersz;
+void obsluz(Tablica& tab, unsigned int polecenie)
+{
+    switch (polecenie)
+    {
+        case 1:
+            return nowa_tablica(tab);
+        case 2:
+            return zmien_rozmiar(tab);
+        case 3:
+            return wyswietl(tab);
+        case 4:
+            return zmien_wartosc(tab);
+        case 5:
+            return wczytaj(tab);
+        case 6:
+            return zapisz(tab);
+        case 7:
+            return szukaj(tab);
+        case 0:
+            return;
+        default:
+            throw bledy(NIEZNANE_POLECENIE);
+    }
+}
 
-	while (true){
-		int wybor;
-		cout << endl;
-		cout << "Menu:"<<endl;
-		cout << "1. Wyswietl tablice."<<endl;
-		cout << "2. Zmien wartosc komorki."<<endl;
-		cout << "3. Zmien rozmiar tablicy."<<endl;
-		cout << "4. Suma wg kolumn."<<endl;
-		cout << "5. Suma wg wierszy."<<endl;
-		cout << "6. Najmniejsza wartosc w wierszach."<<endl;
-		cout << "7. Najmniejsza wartosc w kolumnach."<<endl;
-		cout << "8. Najwieksza wartosc w wierszach."<<endl;
-		cout << "9. Najwieksza wartosc w kolumnach."<<endl;
-		cout << "10. Srednia wartosc w wierszach."<<endl;
-		cout << "11. Srednia wartosc w kolumnach."<<endl;
-		cout << "12. Zmien typ kolumny."<<endl;
-		cin >> wybor;
-		cout << endl;
-
-		switch(wybor){
-			case 1:
-				if(arr.wyswietl_tablice(arr) != SUCCESS){
-					cout << "Blad przy wyswietlaniu." << endl;
-				}
-				break;
-        		case 2:
-				int indeksX;
-				int indeksY;
-				int nowa_wartosc;
-				cout << "Wybierz kolumne z elementem do edytacji: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
-				cin >> indeksX;
-				cout << "Wybierz wiersz z elementem do edytacji: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
-				cin >> indeksY;
-				if(arr.pobierzTypKomorki(indeksX, indeksY) == INT){
-					int nowa_wartosc;
-					cout << "Zmien na (int): ";
-					cin >> nowa_wartosc;
-					if(arr.aktualizuj_zawartoscINT(arr, indeksX, indeksY, nowa_wartosc) != SUCCESS){
-						cout << "Niepoprawna komorka." << endl;
-					}
-				}
-				else if(arr.pobierzTypKomorki(indeksX, indeksY) == STRING){
-					std::string nowa_wartosc;
-					cout << "Zmien na (string): ";
-					cin >> nowa_wartosc;
-
-					if(arr.aktualizuj_zawartoscSTR(arr, indeksX, indeksY, nowa_wartosc) != SUCCESS){
-						cout << "Niepoprawna komorka." << endl;
-					}
-				}
-				break;
-			case 3:
-				int nowy_rozmiarX;
-				int nowy_rozmiarY;
-				cout << "Podaj nowy rozmiarX (>0): ";
-				cin >> nowy_rozmiarX;
-
-				cout << "Podaj nowy rozmiarY(>0): ";
-				cin >> nowy_rozmiarY;
-				if(arr.zmien_rozmiar(&arr, nowy_rozmiarX, nowy_rozmiarY) != SUCCESS){
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 4:
-				//int sumaY, kolumna;
-				cout << "Wybierz kolumne do zsumowania: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
-				cin >> kolumna;
-
-				if(arr.suma_kolumna(arr, kolumna, &sumaY) == SUCCESS){
-					cout << "Suma " << kolumna << "-tej kolumny to: " << sumaY << endl;
-				}
-				else{
-					cout << "Wystapil blad!" << endl;
-				}
-				break;
-			case 5:
-				//int sumaX, wiersz;
-				cout << "Wybierz wiersz do zsumowania: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
-				cin >> wiersz;
-
-				if(arr.suma_wiersz(arr, wiersz, &sumaX) == SUCCESS){
-					cout << "Suma " << wiersz << "-tego wiersza to: " << sumaX << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 6:
-				int najmniejszaY;
-//wiersz;
-				cout << "Wybierz wiersz w ktorym ma wyswietlic sie najmniejsza wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
-				cin >> wiersz;
-
-				if(arr.minimumY(arr, wiersz, &najmniejszaY) == SUCCESS){
-					cout << "Najmniejsza wartosc " << wiersz << "-tego wiersza to: " << najmniejszaY << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 7:
-				int najmniejszaX; 
-//kolumna;
-				cout << "Wybierz kolumne w ktorej ma wyswietlic sie najmniejsza wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
-				cin >> kolumna;
-
-				if(arr.minimumX(arr, kolumna, &najmniejszaX) == SUCCESS){
-					cout << "Najmniejsza wartosc " << kolumna << "-tej kolumny to: " << najmniejszaX << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 8:
-				int najwiekszaY; 
-//wiersz;
-				cout << "Wybierz wiersz w ktorym ma wyswietlic sie najwieksza wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
-				cin >> wiersz;
-
-				if (arr.maximumY(arr, wiersz, &najwiekszaY) == SUCCESS){
-					cout << "Najwieksza wartosc " << wiersz << "-tego wiersza to: " << najwiekszaY << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 9:
-				int najwiekszaX; 
-//kolumna;
-				cout << "Wybierz kolumne w ktorej ma wyswietlic sie najwieksza wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
-				cin >> kolumna;
-
-				if(arr.maximumX(arr, kolumna, &najwiekszaX) == SUCCESS){
-					cout << "Najwieksza wartosc " << kolumna << "-tej kolumny to: " << najwiekszaX << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 10:
-				double sredniaX;
-				int wiersz, sumaX;
-				cout << "Wybierz wiersz w ktorym ma wyswietlic sie srednia wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
-				cin >> wiersz;
-
-				if(arr.srednia_wiersz(arr, wiersz, &sredniaX, &sumaX) == SUCCESS){
-					cout << "Srednia wartosc  " << wiersz << "-tego wiersza to: " << sredniaX << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 11:
-				double sredniaY;
-				int kolumna, sumaY;
-				cout << "Wybierz kolumne w ktorej ma wyswietlic sie srednia wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
-				cin >> kolumna;
-
-				if(arr.srednia_kolumna(arr, kolumna, &sredniaY, &sumaY) == SUCCESS){
-					cout << "Srednia wartosc " << kolumna << "-tej kolumny to: " << sredniaY << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-			case 12:
-				int typ;
-				int zmienianaKolumna;
-				cout << "Wybierz typ: (0 -> STRING / 1 -> INT)";
-				cin >> typ;
-				cout << "Wybierz kolumne ktorej typ chcesz zmienić: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
-				cin >> zmienianaKolumna;
-
-				if(arr.zmienTyp(typ, zmienianaKolumna) == SUCCESS){
-					cout << "Zmieniono typ." << endl;
-				}
-				else{
-					cout << "Wystapil blad." << endl;
-				}
-				break;
-		}
-	}
-	return 0;
+void menu()
+{
+    Tablica tab;
+    unsigned int polecenie;
+    do
+    {
+        cout << "1. Stworz tablice" << endl;
+        cout << "2. Zmiana rozmiaru tablicy" << endl;
+        cout << "3. Wyswietl zawartosc tablicy" << endl;
+        cout << "4. Zmien wartosc w tablicy" << endl;
+        cout << "5. Wczytaj tablice z pliku" << endl;
+        cout << "6. Zapisz tablice do pliku" << endl;
+        cout << "7. Znajdz" << endl;
+        cout << "0. Zamknij program" << endl;
+        cout << endl;
+        cout << "> ";
+        cin >> polecenie;
+        cout << endl;
+        system("clear");
+        try
+        {
+            obsluz(tab, polecenie);
+        }
+        catch (bledy e)
+        {
+            pisz_bledy(cout, e);
+            if (!cin.good())
+            {
+                cin.clear();
+                cin.ignore(1024, '\n');
+            }
+        }
+        cout << endl;
+    }
+    while (polecenie != 0);
 }
