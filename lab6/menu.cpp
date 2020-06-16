@@ -6,6 +6,7 @@ using namespace std;
 int menu(){
 
 	Tablica arr;
+	int sumaY, kolumna, sumaX, wiersz;
 
 	while (true){
 		int wybor;
@@ -71,7 +72,7 @@ int menu(){
 				}
 				break;
 			case 4:
-				int sumaY, kolumna;
+				//int sumaY, kolumna;
 				cout << "Wybierz kolumne do zsumowania: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
 				cin >> kolumna;
 
@@ -83,7 +84,7 @@ int menu(){
 				}
 				break;
 			case 5:
-				int sumaX, wiersz;
+				//int sumaX, wiersz;
 				cout << "Wybierz wiersz do zsumowania: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
 				cin >> wiersz;
 
@@ -95,7 +96,8 @@ int menu(){
 				}
 				break;
 			case 6:
-				int najmniejszaY, wiersz;
+				int najmniejszaY;
+//wiersz;
 				cout << "Wybierz wiersz w ktorym ma wyswietlic sie najmniejsza wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
 				cin >> wiersz;
 
@@ -107,7 +109,8 @@ int menu(){
 				}
 				break;
 			case 7:
-				int najmniejszaX, kolumna;
+				int najmniejszaX; 
+//kolumna;
 				cout << "Wybierz kolumne w ktorej ma wyswietlic sie najmniejsza wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
 				cin >> kolumna;
 
@@ -119,7 +122,8 @@ int menu(){
 				}
 				break;
 			case 8:
-				int najwiekszaY, wiersz;
+				int najwiekszaY; 
+//wiersz;
 				cout << "Wybierz wiersz w ktorym ma wyswietlic sie najwieksza wartosc: (od 0 do " << arr.pobierzRozmiarY() - 1 << "): " << endl;
 				cin >> wiersz;
 
@@ -131,7 +135,8 @@ int menu(){
 				}
 				break;
 			case 9:
-				int najwiekszaX, kolumna;
+				int najwiekszaX; 
+//kolumna;
 				cout << "Wybierz kolumne w ktorej ma wyswietlic sie najwieksza wartosc: (od 0 do " << arr.pobierzRozmiarX() - 1 << "): " << endl;
 				cin >> kolumna;
 

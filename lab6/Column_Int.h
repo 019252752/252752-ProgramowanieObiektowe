@@ -1,6 +1,6 @@
 #pragma once
 #include "Column.h"
-#include "Cell.class.h"
+#include "Cell_class.h"
 
 class KolumnaInt : public Kolumna{
 	public:

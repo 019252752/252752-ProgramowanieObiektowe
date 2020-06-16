@@ -131,7 +131,7 @@ int Tablica::minimumX(Tablica arr, int kolumna, int *najmniejszaY){
 		*najmniejszaY = 0;
 
 		for(int j = 0; j < arr.rozmiarY; j++){
-			najmniejszaY = arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
+			*najmniejszaY = arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
 
 			if(arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt() < *najmniejszaY){
 				*najmniejszaY = arr.tablica[kolumna].pobierzKomorke(j)->pobierzWartoscInt();
