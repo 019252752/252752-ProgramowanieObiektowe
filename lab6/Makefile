@@ -1,14 +1,11 @@
-all: program
-
-program: main.o menu.o Array_class.o Table_view.o 
-	g++ main.o menu.o Array_class.o Table_view.o -o program
-main.o: menu.cpp
+program: main.o menu.o tablica.o komorka.o
+	g++ -o program main.o menu.o tablica.o komorka.o
+main.o: main.cpp menu.hpp
 	g++ -c main.cpp
-Array_class.o: Array_class.cpp
-	g++ -c Array_class.cpp
-Table_view.o: Table_view.cpp
-	g++ -c Table_view.cpp
-menu.o: menu.cpp
+menu.o: menu.cpp menu.hpp tablica.hpp
 	g++ -c menu.cpp
-clean:
-	rm -f *.o program
+tablica.o: tablica.cpp tablica.hpp komorka.hpp
+	g++ -c tablica.cpp
+komorka.o: komorka.cpp komorka.hpp
+	g++ -c komorka.cpp
+© 2020 GitHub, Inc.
