@@ -1,68 +1,80 @@
-#include "komorka.hpp"
+#include "Cell_class.h"
 
-Komorka::~Komorka()
-{
-}
-
-istream& operator>>(istream& in, Komorka& k)
-{
-    k.czytaj(in);
-    return in;
-}
-ostream& operator<<(ostream& out, const Komorka& k)
-{
-    k.pisz(out);
-    return out;
+Komorka::~Komorka(){
 }
 
-double KomorkaInt::wartosc_statystyczna() const
-{
-    return wartosc;
-}
-double KomorkaDouble::wartosc_statystyczna() const
-{
-    return wartosc;
-}
-double KomorkaString::wartosc_statystyczna() const
-{
-    throw bledy(NIE_MA_WARTOSCI_STATYSTYCZNEJ);
-    return 0.0;
+istream& operator>>(istream& in, Komorka& k){
+
+	k.czytaj(in);
+	return in;
 }
 
-void KomorkaInt::pisz(ostream& out) const
-{
-    out << wartosc;
-    if (!out.good())
-        throw bledy(ZLY_STAN_STRUMIENIA);
-}
-void KomorkaDouble::pisz(ostream& out) const
-{
-    out << wartosc;
-    if (!out.good())
-        throw bledy(ZLY_STAN_STRUMIENIA);
-}
-void KomorkaString::pisz(ostream& out) const
-{
-    out << wartosc;
-    if (!out.good())
-        throw bledy(ZLY_STAN_STRUMIENIA);
+ostream& operator<<(ostream& out, const Komorka& k){
+
+	k.pisz(out);
+	return out;
 }
 
-void KomorkaInt::czytaj(istream& in)
-{
-    in >> wartosc;
-    if (!in.good())
-        throw bledy(ZLY_STAN_STRUMIENIA);
+double KomorkaInt::wartosc_statystyczna() const{
+
+	return wartosc;
 }
-void KomorkaDouble::czytaj(istream& in)
-{
-    in >> wartosc;
-    if (!in.good())
-        throw bledy(ZLY_STAN_STRUMIENIA);
+
+double KomorkaDouble::wartosc_statystyczna() const{
+
+	return wartosc;
 }
-void KomorkaString::czytaj(istream& in)
-{
-    in >> wartosc;
-    if (!in.good())
-        throw bledy(ZLY_STAN_STRUMIENIA);
+
+double KomorkaString::wartosc_statystyczna() const{
+
+	throw bledy(NIE_MA_WARTOSCI_STATYSTYCZNEJ);
+	return 0.0;
+}
+
+void KomorkaInt::pisz(ostream& out) const{
+
+	out << wartosc;
+	if(!out.good()){
+		throw bledy(ZLY_STAN_STRUMIENIA);
+	}
+}
+
+void KomorkaDouble::pisz(ostream& out) const{
+
+	out << wartosc;
+	if(!out.good()){
+		throw bledy(ZLY_STAN_STRUMIENIA);
+	}
+}
+
+void KomorkaString::pisz(ostream& out) const{
+
+	out << wartosc;
+	if(!out.good()){
+		throw bledy(ZLY_STAN_STRUMIENIA);
+	}
+}
+
+void KomorkaInt::czytaj(istream& in){
+
+	in >> wartosc;
+	if(!in.good()){
+		throw bledy(ZLY_STAN_STRUMIENIA);
+	}
+}
+
+void KomorkaDouble::czytaj(istream& in){
+
+	in >> wartosc;
+	if(!in.good()){
+		throw bledy(ZLY_STAN_STRUMIENIA);
+	}
+}
+
+void KomorkaString::czytaj(istream& in){
+
+	in >> wartosc;
+	if(!in.good()){
+		throw bledy(ZLY_STAN_STRUMIENIA);
+	}
 }

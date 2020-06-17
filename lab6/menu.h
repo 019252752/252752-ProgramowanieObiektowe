@@ -1,13 +1,13 @@
-#ifndef menu_hpp
-#define menu_hpp
+#ifndef menu_h
+#define menu_h
 
 #include <iostream>
 #include <fstream>
-#include "menu.hpp"
-#include "tablica.hpp"
+#include "menu.h"
+#include "Array_class.h"
 using namespace std;
 
 void pisz_bledy(ostream& out, bledy b);
 void menu();
 
-#endif /* menu_hpp */
+#endif

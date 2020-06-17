@@ -1,8 +1,8 @@
-#include "menu.hpp"
+#include "menu.h"
 using namespace std;
 
-int main()
-{
-    menu();
-    return 0;
+int main(){
+
+	menu();
+	return 0;
 }
