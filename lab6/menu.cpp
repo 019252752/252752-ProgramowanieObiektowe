@@ -1,5 +1,6 @@
 #include "menu.h"
 
+//opis bledu
 void pisz_bledy(ostream& out, bledy b){
 
 	if(b & NIE_MA_WARTOSCI_STATYSTYCZNEJ){
@@ -25,6 +26,7 @@ void pisz_bledy(ostream& out, bledy b){
 	}
 }
 
+//tworzenie nowej tablicy, przekazanie rozmiarow i typow
 void nowa_tablica(Tablica& t){
 
 	size_t nowy_x;
@@ -53,6 +55,7 @@ void nowa_tablica(Tablica& t){
 	t = Tablica(nowy_x, nowy_y, nowe_typy);
 }
 
+//zmiana rozmiaru tablicy i usuniecie starej
 void zmien_rozmiar(Tablica& t){
 
 	size_t nowy_x;
@@ -82,11 +85,13 @@ void zmien_rozmiar(Tablica& t){
 	delete [] nowe_typy;
 }
 
+//wyswietlenie tablicy
 void wyswietl(Tablica& t){
 
 	t.wypisz(cout);
 }
 
+//dane do zmiany wartosci komorki
 void zmien_wartosc(Tablica& t){
 
 	size_t x;
@@ -99,6 +104,7 @@ void zmien_wartosc(Tablica& t){
 	cin >> t.zwroc_komorke(x, y);
 }
 
+//wczytanie danych z pliku
 void wczytaj(Tablica& t){
 
 	string nazwa_pliku;
@@ -112,6 +118,7 @@ void wczytaj(Tablica& t){
 	plik.close();
 }
 
+//zapisanie danych do pliku
 void zapisz(Tablica& t){
 
 	string nazwa_pliku;
@@ -125,6 +132,7 @@ void zapisz(Tablica& t){
 	plik.close();
 }
 
+//menu akcji
 void szukaj(Tablica& t){
 
 	unsigned int tryb;
@@ -132,6 +140,7 @@ void szukaj(Tablica& t){
 	size_t n;
 	double wynik;
 	Komorka** temp = nullptr;
+	cout << "MENU:" << endl;
 	cout << "1. Sumuj według kolumny." << endl;
 	cout << "2. Sumuj według wiersza." << endl;
 	cout << "3. Średnia według kolumny." << endl;
@@ -184,6 +193,7 @@ void szukaj(Tablica& t){
 	}
 }
 
+//odniesienie do operacji z menu()
 void obsluz(Tablica& tab, unsigned int polecenie){
 
 	switch (polecenie){
@@ -208,6 +218,7 @@ void obsluz(Tablica& tab, unsigned int polecenie){
 	}
 }
 
+//menu operacji
 void menu(){
 
 	Tablica tab;
@@ -222,10 +233,9 @@ void menu(){
 		cout << "6. Zapisz tablice do pliku." << endl;
 		cout << "7. Znajdz." << endl;
 		cout << "0. Zamknij program." << endl;
-		cout << endl;
 		cin >> polecenie;
 		cout << endl;
-		system("clear");
+		system("clear");	//czyszczenie ekranu
 		try{
 			obsluz(tab, polecenie);
 		}
@@ -233,10 +243,10 @@ void menu(){
 			pisz_bledy(cout, e);
 			if(!cin.good()){
 				cin.clear();
-				cin.ignore(1024, '\n');
+				cin.ignore(1024, '\n');	//ignoruje kilka znakow, by program nie wariowal
 			}
 		}
 		cout << endl;
 	}
-	while (polecenie != 0);
+	while(polecenie != 0);
 }

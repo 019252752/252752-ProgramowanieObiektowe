@@ -5,6 +5,8 @@
 #include <string>
 using namespace std;
 
+//interfejs
+
 //lista mozliwych do utworzenia typow komorek
 enum typy: unsigned int{
 

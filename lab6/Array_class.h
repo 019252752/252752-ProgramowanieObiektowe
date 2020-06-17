@@ -1,5 +1,5 @@
 #ifndef tablica_h
-#define tablica_h
+#define tablica_h6
 
 #include <iostream>
 #include "Cell_class.h"

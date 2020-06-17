@@ -7,6 +7,7 @@ Tablica::Tablica(){
 	tab = nullptr;
 }
 
+//nowa tablica
 Tablica::Tablica(size_t nowy_x, size_t nowy_y, typy* nowe_typy){
 
 	if(nowy_x == 0 || nowy_y == 0){
@@ -46,6 +47,7 @@ Tablica::Tablica(size_t nowy_x, size_t nowy_y, typy* nowe_typy){
 	}
 }
 
+//usuwanie starej tablicy
 void Tablica::usun_stara(){
 
 	delete [] typy_tablicy;
@@ -58,6 +60,7 @@ void Tablica::usun_stara(){
 	delete [] tab;
 }
 
+//kopiowanie nowej tablicy
 void Tablica::skopiuj_nowa(const Tablica& t){
 
 	if(t.x == 0 || t.y == 0){
@@ -99,6 +102,7 @@ void Tablica::skopiuj_nowa(const Tablica& t){
 	}
 }
 
+//przenoszenie danych
 void Tablica::przenies_nowa(Tablica& t){
 
 	x = t.x;
@@ -117,10 +121,12 @@ Tablica::Tablica(const Tablica& t){
 }
 
 Tablica::Tablica(Tablica&& t){
+
 	przenies_nowa(t);
 }
 
 Tablica& Tablica::operator=(const Tablica& t){
+
 	usun_stara();
 	skopiuj_nowa(t);
 	return *this;
@@ -347,5 +353,5 @@ double Tablica::policz_sum(Komorka** t, size_t n){
 
 double Tablica::policz_avg(Komorka** t, size_t n){
 
-	return Tablica::policz_sum(t, n) / (double)n;
+	return Tablica::policz_sum(t, n) / (double)n;	//dla stringa zwraca 0.0 oraz blad
 }
